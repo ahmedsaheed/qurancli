@@ -1,3 +1,5 @@
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -7,7 +9,9 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
@@ -94,13 +98,53 @@ import java.util.concurrent.Callable;
         return verses.toString();
     }
 
+     public static String getAudio(int surahNumber) throws IOException {
+         String url = "https://api.alquran.cloud/v1/surah/"+surahNumber+"/ar.alafasy";
+         String responses = makeRequest(url);
+         ArrayList<String> Audiourl = new ArrayList<String>();
+
+         try{
+                JSONObject jsonObject = new JSONObject(responses);
+                JSONObject data = jsonObject.getJSONObject("data");
+                JSONArray ayah = data.getJSONArray("ayahs");
+                for(int i = 0; i < ayah.length(); i++) {
+                    JSONObject ayah_data = ayah.getJSONObject(i);
+                    String audio = ayah_data.getString("audio");
+                    Audiourl.add(audio);
+                    playAudio(audio);
+
+                }
+         }catch (Exception e) {
+             System.out.println(e);
+         }
+
+
+         return responses;
+     }
+
+     public static void playAudio(String path) {
+
+         try {
+             URL url = new URL(path);
+             BufferedInputStream BIS = new BufferedInputStream(url.openStream());
+
+             Player player = new Player(BIS);
+//             songTotalLength = url.openStream().available();
+             //System.out.println(songTotalLength);
+             player.play();
+
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
+
+
      public static void main(String[] args) throws IOException {
         System.out.println(GetJuz(1));
+        getAudio(2);
      }
+
 }
-
-
-
 
 
 @Command(name = "Get Surah", mixinStandardHelpOptions = true, version = "checksum 4.0",
