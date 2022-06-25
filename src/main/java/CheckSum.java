@@ -12,6 +12,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.Callable;
 
  class getQuran {
@@ -170,24 +171,28 @@ import java.util.concurrent.Callable;
 
 
      public static void main(String[] args) throws IOException {
-        //getAudio(109);
-         System.out.println(search("boy"));
+        getAudio(99);
+         //System.out.println(search("boy"));
      }
-
-
 
 }
 
 
-@Command(name = "Get Surah", mixinStandardHelpOptions = true, version = "checksum 4.0",
-        description = "Returns the surah of the given number")
-class CheckSum implements Callable<Integer> {
+@Command(name = "quranCLI", mixinStandardHelpOptions = true, version = "quranCLI 1.0",
+        footer = "Copyright(c) quranCLI 2022",
+        description = "A simple tool to Read, Search and Recite the Quran\n")
+class quranCLI implements Callable<Integer> {
 
-    @Option(names = {"-s", "--surahNumber"}, description = "The surah Number (114,2,1...)", interactive = true)
+    @Option(names = {"-s", "--surah-number"}, description = "find a surah by it's number", interactive = true)
     private int surahNumber;
 
-    @Option(names = {"-a", "--audio"}, description = "Would you like audio Y/N", interactive = true)
-    private char audio;
+//    @Option(names = {"-a", "--audio"}, description = "plays audio version of surah", interactive = true)
+//    private char audio;
+
+    @Option(names = {"-a", "--audio"}, description = "plays audio version of surah")
+    boolean a;
+
+
 
     @Override
     public Integer call() throws Exception { // your business logic goes here...
@@ -195,13 +200,12 @@ class CheckSum implements Callable<Integer> {
             System.out.println("Opps ! The Quran has 114 Surahs. Let's try again");
             return 0;
         }
-        if(audio == 'Y' || audio == 'y') {
+        if(a) {
             getQuran.getAudio(surahNumber);
-            return 0;
         }else{
             System.out.println(getQuran.GetSurah(surahNumber));
-            return 0;
         }
+        return 0;
     }
 
 
@@ -210,7 +214,7 @@ class CheckSum implements Callable<Integer> {
     // this example implements Callable, so parsing, error handling and handling user
     // requests for usage help or version help can be done with one line of code.
     public static void main(String... args) {
-        int exitCode = new CommandLine(new CheckSum()).execute("-s","-a");
+        int exitCode = new CommandLine(new quranCLI()).execute("-s");
 //        System.exit(exitCode);
     }
 }
