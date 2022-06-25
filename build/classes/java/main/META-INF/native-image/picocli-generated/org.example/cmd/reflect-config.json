@@ -6,8 +6,7 @@
     "allDeclaredMethods" : true,
     "allPublicMethods" : true,
     "fields" : [
-      { "name" : "algorithm" },
-      { "name" : "file" }
+      { "name" : "surahNumber" }
     ]
   },
   {
