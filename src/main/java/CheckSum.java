@@ -102,6 +102,7 @@ import java.util.concurrent.Callable;
          String url = "https://api.alquran.cloud/v1/surah/"+surahNumber+"/ar.alafasy";
          String responses = makeRequest(url);
          ArrayList<String> Audiourl = new ArrayList<String>();
+         System.out.println(getQuran.GetSurah(surahNumber));
 
          try{
                 JSONObject jsonObject = new JSONObject(responses);
@@ -129,8 +130,6 @@ import java.util.concurrent.Callable;
              BufferedInputStream BIS = new BufferedInputStream(url.openStream());
 
              Player player = new Player(BIS);
-//             songTotalLength = url.openStream().available();
-             //System.out.println(songTotalLength);
              player.play();
 
          } catch (Exception e) {
@@ -140,8 +139,7 @@ import java.util.concurrent.Callable;
 
 
      public static void main(String[] args) throws IOException {
-        System.out.println(GetJuz(1));
-        getAudio(2);
+        getAudio(114);
      }
 
 }
