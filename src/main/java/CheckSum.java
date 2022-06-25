@@ -8,10 +8,26 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
  class getQuran {
-    static void GetFullQuran() {
+
+     protected static String makeRequest(String url) throws IOException {
+         String responses = "";
+         try {
+             OkHttpClient client = new OkHttpClient();
+             Request request = new Request.Builder()
+                     .url(url)
+                     .build();
+             Response response = client.newCall(request).execute();
+             responses = response.body().string();
+         } catch (Exception e) {
+             System.out.println(e);
+         }
+         return responses;
+     }
+     static void GetFullQuran() {
 
         try {
             OkHttpClient client = new OkHttpClient();
@@ -26,37 +42,32 @@ import java.util.concurrent.Callable;
 
     }
 
-    protected static String makeRequest(String url) throws IOException {
-        String responses = "";
-        try {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-            Response response = client.newCall(request).execute();
-            responses = response.body().string();
-        } catch (Exception e) {
-            System.out.println(e);
+    static String GetJuz(int Juz) throws IOException {
+        StringBuilder juz = new StringBuilder();
+        StringBuilder juzz = new StringBuilder();
+        ArrayList<String> Sura = new ArrayList<String>();
+        String url = "http://api.alquran.cloud/v1/juz/" + Juz;
+        String responses = makeRequest(url);
+        JSONObject jsonObject = new JSONObject(responses);
+        JSONObject data = jsonObject.getJSONObject("data");
+        JSONArray surahs = data.getJSONArray("ayahs");
+
+        for(int i = 0; i < surahs.length(); i++) {
+          JSONObject surah = surahs.getJSONObject(i);
+          JSONObject surah_metadata = surah.getJSONObject("surah");
+            String name = surah_metadata.getString("name");
+          if(!Sura.contains(name)) {
+            Sura.add(name);
+          }
+          juz.append(surah.getString("text")).append("\n");
         }
-        return responses;
-    }
-
-    static String GetJuz(int Juz) {
-        String responses = "";
-
-        try {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url("http://api.alquran.cloud/v1/juz/" + Juz)
-                    .build();
-            Response response = client.newCall(request).execute();
-            System.out.println(response.body().string());
-            responses = response.body().string();
-        } catch (Exception e) {
-            System.out.println(e);
+        juzz.append("Juz number " +Juz+" contains ").append(Sura.size() + 1).append(" Suras\n");
+        for (String s : Sura) {
+            juzz.append(s).append(" | ");
         }
+        juzz.append("\n\n" + juz.toString());
 
-        return responses;
+        return juzz.toString();
     }
 
     public static String GetSurah(int surahNumber) throws IOException {
@@ -84,12 +95,11 @@ import java.util.concurrent.Callable;
     }
 
      public static void main(String[] args) throws IOException {
-        //GetFullQuran();
-        //System.out.println(GetJuz(1, "quran-uthmani"));
-        //System.out.println(GetSurah(1));
-        System.out.println(GetSurah(1));
+        System.out.println(GetJuz(1));
      }
 }
+
+
 
 
 
