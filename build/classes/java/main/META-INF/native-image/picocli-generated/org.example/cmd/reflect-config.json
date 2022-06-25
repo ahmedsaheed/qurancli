@@ -6,6 +6,7 @@
     "allDeclaredMethods" : true,
     "allPublicMethods" : true,
     "fields" : [
+      { "name" : "audio" },
       { "name" : "surahNumber" }
     ]
   },

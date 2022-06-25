@@ -1,4 +1,3 @@
-import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -123,6 +122,38 @@ import java.util.concurrent.Callable;
          return responses;
      }
 
+     public record search (String ArabicName, String EnglishName, String FoundText) {}
+
+
+     public static ArrayList search(String keyword) throws IOException {
+
+         int sum = 0;
+         ArrayList<search> Matches = new ArrayList<search>();
+         String url = "http://api.alquran.cloud/v1/search/"+keyword+"/all/en";
+         String response = makeRequest(url);
+         JSONObject jsonObject = new JSONObject(response);
+         JSONObject data = jsonObject.getJSONObject("data");
+         JSONArray matched = data.getJSONArray("matches");
+         for(int i = 0; i < matched.length(); i++) {
+             JSONObject surah = matched.getJSONObject(i);
+             JSONObject surah_metadata = surah.getJSONObject("surah");
+             String name = surah_metadata.getString("name");
+             String Englishname = surah_metadata.getString("englishName");
+             String text = surah.getString("text");
+             int wordCount = surah.getInt("numberInSurah");
+//             System.out.println(name);
+//             System.out.println(Englishname);
+//             System.out.println(text);
+//             System.out.println(wordCount);
+//             sum += wordCount;
+//             System.out.println(sum);
+             Matches.add(new search(name, Englishname, text));
+
+         }
+
+         return Matches;
+     }
+
      public static void playAudio(String path) {
 
          try {
@@ -139,8 +170,11 @@ import java.util.concurrent.Callable;
 
 
      public static void main(String[] args) throws IOException {
-        getAudio(114);
+        //getAudio(109);
+         System.out.println(search("boy"));
      }
+
+
 
 }
 
@@ -152,20 +186,31 @@ class CheckSum implements Callable<Integer> {
     @Option(names = {"-s", "--surahNumber"}, description = "The surah Number (114,2,1...)", interactive = true)
     private int surahNumber;
 
+    @Option(names = {"-a", "--audio"}, description = "Would you like audio Y/N", interactive = true)
+    private char audio;
+
     @Override
     public Integer call() throws Exception { // your business logic goes here...
         if (surahNumber < 1 || surahNumber > 114) {
             System.out.println("Opps ! The Quran has 114 Surahs. Let's try again");
+            return 0;
         }
-        System.out.println(getQuran.GetSurah(surahNumber));
-        return 0;
+        if(audio == 'Y' || audio == 'y') {
+            getQuran.getAudio(surahNumber);
+            return 0;
+        }else{
+            System.out.println(getQuran.GetSurah(surahNumber));
+            return 0;
+        }
     }
+
+
 
 
     // this example implements Callable, so parsing, error handling and handling user
     // requests for usage help or version help can be done with one line of code.
     public static void main(String... args) {
-        int exitCode = new CommandLine(new CheckSum()).execute("-s");
+        int exitCode = new CommandLine(new CheckSum()).execute("-s","-a");
 //        System.exit(exitCode);
     }
 }
