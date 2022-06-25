@@ -35,3 +35,7 @@ class CheckSum implements Callable<Integer> {
         System.exit(exitCode);
     }
 }
+/*
+*
+*  java -cp /Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/info.picocli/picocli/4.6.1/49a67ee4b4d9722fa60f3f9ffaffa72861c32966/picocli-4.6.1.jar /Users/ahmedsaheed/Desktop/Desktop/cmdWithJava/src/main/java/CheckSum.java /Users/ahmedsaheed/Desktop/Desktop/cmdWithJava/hello.txt
+ * */
