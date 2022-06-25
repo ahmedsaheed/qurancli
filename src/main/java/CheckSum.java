@@ -6,12 +6,8 @@ import org.json.JSONObject;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 
-import java.io.File;
-import java.math.BigInteger;
-import java.nio.file.Files;
-import java.security.MessageDigest;
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
  class getQuran {
@@ -30,18 +26,32 @@ import java.util.concurrent.Callable;
 
     }
 
-    static String GetJuz(int Juz, String edition) {
+    protected static String makeRequest(String url) throws IOException {
+        String responses = "";
+        try {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+            Response response = client.newCall(request).execute();
+            responses = response.body().string();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return responses;
+    }
+
+    static String GetJuz(int Juz) {
         String responses = "";
 
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("http://api.alquran.cloud/v1/juz/" + Juz + "/" + edition)
+                    .url("http://api.alquran.cloud/v1/juz/" + Juz)
                     .build();
             Response response = client.newCall(request).execute();
             System.out.println(response.body().string());
             responses = response.body().string();
-            System.out.printf("\u0627\u0644\u0642\u0631\u0622\u0646 \u0627\u0644\u0643\u0631\u064a\u0645 \u0628\u0631\u0633\u0645 \u0627\u0644\u0639\u062b\u0645\u0627\u0646\u064a");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -49,28 +59,11 @@ import java.util.concurrent.Callable;
         return responses;
     }
 
-    public static String GetSurah(int surahNumber) {
-        String responses = "";
-
-        try {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url("http://api.alquran.cloud/v1/surah/" + surahNumber)
-                    .build();
-            Response response = client.newCall(request).execute();
-            //System.out.println(response.body().string());
-            responses = response.body().string();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return responses;
-    }
-
-    public static String ConvertSurahResponse(String response) {
+    public static String GetSurah(int surahNumber) throws IOException {
+        String url = "http://api.alquran.cloud/v1/surah/" + surahNumber;
         StringBuilder verses = new StringBuilder();
         try {
-            JSONObject jsonObject = new JSONObject(response);
+            JSONObject jsonObject = new JSONObject(makeRequest(url));
             JSONObject data = jsonObject.getJSONObject("data");
             //GET SURAH ARABIC NAME
             String name = data.getString("name");
@@ -88,16 +81,18 @@ import java.util.concurrent.Callable;
             System.out.println(e);
         }
         return verses.toString();
-
     }
 
-     public static void main(String[] args) {
+     public static void main(String[] args) throws IOException {
         //GetFullQuran();
         //System.out.println(GetJuz(1, "quran-uthmani"));
         //System.out.println(GetSurah(1));
-        System.out.println(ConvertSurahResponse(GetSurah(1)));
+        System.out.println(GetSurah(1));
      }
 }
+
+
+
 @Command(name = "Get Surah", mixinStandardHelpOptions = true, version = "checksum 4.0",
         description = "Returns the surah of the given number")
 class CheckSum implements Callable<Integer> {
@@ -110,7 +105,7 @@ class CheckSum implements Callable<Integer> {
         if (surahNumber < 1 || surahNumber > 114) {
             System.out.println("Opps ! The Quran has 114 Surahs. Let's try again");
         }
-        System.out.println(getQuran.ConvertSurahResponse(getQuran.GetSurah(surahNumber)));
+        System.out.println(getQuran.GetSurah(surahNumber));
         return 0;
     }
 
