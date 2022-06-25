@@ -27,6 +27,7 @@ class CheckSum implements Callable<Integer> {
         return 0;
     }
 
+
     // this example implements Callable, so parsing, error handling and handling user
     // requests for usage help or version help can be done with one line of code.
     public static void main(String... args) {
