@@ -7,8 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Help.Ansi;
 import picocli.CommandLine.Option;
 
+import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -90,17 +92,24 @@ class quranCLI implements Callable<Integer> {
     public static String GetSurah(int surahNumber) throws IOException {
         String url = "http://api.alquran.cloud/v1/surah/" + surahNumber;
         StringBuilder verses = new StringBuilder();
+        String line = new String(new char[48]).replace('\0', '-');
+
         try {
             JSONObject jsonObject = new JSONObject(makeRequest(url));
             JSONObject data = jsonObject.getJSONObject("data");
             //GET SURAH ARABIC NAME
-            String name = data.getString("name");
-            //verses.append(name).append("\n");
+            String names = data.getString("name");
+            String name = Ansi.AUTO.string("@|bold,magenta,underline " + names + "|@");
+            System.out.println(line);
+            System.out.printf("|%s|%n",
+                    StringUtils.center(StringUtils.center(name, 50), 50, ""));
+            System.out.println(line);
+
             int w = 20;
 
-            System.out.println(StringUtils.rightPad("+", w - 1, "-") + "+");
-            System.out.println(StringUtils.center(StringUtils.center(name, w - 2), w, "|"));
-            System.out.println(StringUtils.rightPad("+", w - 1, "-") + "+");
+//            System.out.println(StringUtils.rightPad("+", w - 1, "-") + "+");
+//            System.out.println(StringUtils.center(StringUtils.center(name, w - 2), w, "|"));
+//            System.out.println(StringUtils.rightPad("+", w - 1, "-") + "+");
             System.out.println("\n");
             //GET THE ARABIC TEXT OF THE SURAH
             JSONArray ayahs = data.getJSONArray("ayahs");
@@ -116,7 +125,7 @@ class quranCLI implements Callable<Integer> {
         }
         int width = 50;
         System.out.println(StringUtils.rightPad("+", width - 1, "-") + "+");
-        System.out.println(StringUtils.center(StringUtils.center(verses.toString(), width - 2), width, "|"));
+        System.out.println(StringUtils.center(StringUtils.center(Ansi.AUTO.string("@|bold,blue " + verses.toString() + "|@"), width - 2), width, "|"));
         System.out.println(StringUtils.rightPad("+", width - 1, "-") + "+");
         return verses.toString();
     }
@@ -192,6 +201,13 @@ class quranCLI implements Callable<Integer> {
         }
     }
 
+//    public static void KEYLISTENER(KeyEvent e){
+//        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+//            System.out.println("Good Bye");
+//            System.exit(0);
+//        }
+//    }
+
 
     @Option(names = {"-s", "--surah-number"}, description = "find a surah by it's number in range 1..114")
     private int surahNumber;
@@ -236,7 +252,7 @@ class quranCLI implements Callable<Integer> {
     // this example implements Callable, so parsing, error handling and handling user
     // requests for usage help or version help can be done with one line of code.
     public static void main(String... args) {
-        int exitCode = new CommandLine(new quranCLI()).setColorScheme(colorScheme).execute(args);
+        int exitCode = new CommandLine(new quranCLI()).setColorScheme(colorScheme).execute("-s","1");
 //        System.exit(exitCode);
     }
 }
