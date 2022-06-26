@@ -43,9 +43,7 @@ class quranCLI implements Callable<Integer> {
         }
         return responses;
     }
-    protected String reverse(String s) {
-        return new StringBuilder(s).reverse().toString();
-    }
+
     static void GetFullQuran() {
 
         try {
@@ -97,21 +95,16 @@ class quranCLI implements Callable<Integer> {
         try {
             JSONObject jsonObject = new JSONObject(makeRequest(url));
             JSONObject data = jsonObject.getJSONObject("data");
-            //GET SURAH ARABIC NAME
             String names = data.getString("name");
-            String name = Ansi.AUTO.string("@|bold,magenta,underline " + names + "|@");
-            System.out.println(line);
-            System.out.printf("|%s|%n",
-                    StringUtils.center(StringUtils.center(name, 50), 50, ""));
-            System.out.println(line);
-
-            int w = 20;
-
-//            System.out.println(StringUtils.rightPad("+", w - 1, "-") + "+");
-//            System.out.println(StringUtils.center(StringUtils.center(name, w - 2), w, "|"));
-//            System.out.println(StringUtils.rightPad("+", w - 1, "-") + "+");
+            String name = Ansi.AUTO.string("@|bold,magenta,underline SURAH_NAME: " + names + "|@");
+            //BUILT CONTAINER FOR THE SURAH NAME
+            double v = "SURAH_NAME: ".length() + name.length() / 3.5;
+            System.out.println(new String(new char[(int) v]).replace('\0', '-'));
+            System.out.printf("|%s\n",
+                    StringUtils.center(name, 52));
+            System.out.println(new String(new char[(int) v]).replace('\0', '-'));
             System.out.println("\n");
-            //GET THE ARABIC TEXT OF THE SURAH
+            //BUILT CONTAINER FOR THE SURAH CONTENT
             JSONArray ayahs = data.getJSONArray("ayahs");
             for (int i = 0; i < ayahs.length(); i++) {
                 JSONObject ayah = ayahs.getJSONObject(i);
@@ -252,7 +245,7 @@ class quranCLI implements Callable<Integer> {
     // this example implements Callable, so parsing, error handling and handling user
     // requests for usage help or version help can be done with one line of code.
     public static void main(String... args) {
-        int exitCode = new CommandLine(new quranCLI()).setColorScheme(colorScheme).execute("-s","1");
+        int exitCode = new CommandLine(new quranCLI()).setColorScheme(colorScheme).execute(args);
 //        System.exit(exitCode);
     }
 }
