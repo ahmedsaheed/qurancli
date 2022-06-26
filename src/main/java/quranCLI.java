@@ -2,6 +2,7 @@ import javazoom.jl.player.Player;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import picocli.CommandLine;
@@ -19,8 +20,12 @@ import java.util.concurrent.Callable;
         footer = "\nCopyright(c) quranCLI 2022",
         description = "A simple tool to Read, Search and Recite the Quran\n")
 class quranCLI implements Callable<Integer> {
-    ////   java -cp .:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/info.picocli/picocli/4.6.1/49a67ee4b4d9722fa60f3f9ffaffa72861c32966/picocli-4.6.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/javazoom/jlayer/1.0.1/2bfef7a5a4c9af2184ff74b460b6d7d24349b98a/jlayer-1.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.0.0/ab5a73fa2ccb4a36b0b5c69fe10b16d0255bcf8/okio-jvm-3.0.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.7.0/a5f42c684ad9003160ef0d0f693ecf0ba7b13549/kotlin-stdlib-1.7.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/4.10.0/cd63657ac15770ed1420647154c9f44645533bef/okhttp-4.10.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.json/json/20220320/6df2c050972619466f6dcef7654ef9bcc01dfd0/json-20220320.jar /Users/ahmedsaheed/Desktop/Desktop/cmdWithJava/src/main/java/quranCLI.java
-
+    /*
+    TO REBUILD
+    javac -cp /Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/info.picocli/picocli/4.6.1/49a67ee4b4d9722fa60f3f9ffaffa72861c32966/picocli-4.6.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.12.0/c6842c86792ff03b9f1d1fe2aab8dc23aa6c6f0e/commons-lang3-3.12.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/javazoom/jlayer/1.0.1/2bfef7a5a4c9af2184ff74b460b6d7d24349b98a/jlayer-1.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.0.0/ab5a73fa2ccb4a36b0b5c69fe10b16d0255bcf8/okio-jvm-3.0.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.7.0/a5f42c684ad9003160ef0d0f693ecf0ba7b13549/kotlin-stdlib-1.7.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/4.10.0/cd63657ac15770ed1420647154c9f44645533bef/okhttp-4.10.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.json/json/20220320/6df2c050972619466f6dcef7654ef9bcc01dfd0/json-20220320.jar -d /Users/ahmedsaheed/Desktop/Desktop/cmdWithJava/classes /Users/ahmedsaheed/Desktop/Desktop/cmdWithJava/src/main/java/quranCLI.java
+    TO EXECUTE
+    java -cp .:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/info.picocli/picocli/4.6.1/49a67ee4b4d9722fa60f3f9ffaffa72861c32966/picocli-4.6.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.12.0/c6842c86792ff03b9f1d1fe2aab8dc23aa6c6f0e/commons-lang3-3.12.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/javazoom/jlayer/1.0.1/2bfef7a5a4c9af2184ff74b460b6d7d24349b98a/jlayer-1.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.0.0/ab5a73fa2ccb4a36b0b5c69fe10b16d0255bcf8/okio-jvm-3.0.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.7.0/a5f42c684ad9003160ef0d0f693ecf0ba7b13549/kotlin-stdlib-1.7.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/4.10.0/cd63657ac15770ed1420647154c9f44645533bef/okhttp-4.10.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.json/json/20220320/6df2c050972619466f6dcef7654ef9bcc01dfd0/json-20220320.jar /Users/ahmedsaheed/Desktop/Desktop/cmdWithJava/src/main/java/quranCLI.java
+     */
 
     protected static String makeRequest(String url) throws IOException {
         String responses = "";
@@ -35,6 +40,9 @@ class quranCLI implements Callable<Integer> {
             System.out.println(e);
         }
         return responses;
+    }
+    protected String reverse(String s) {
+        return new StringBuilder(s).reverse().toString();
     }
     static void GetFullQuran() {
 
@@ -87,19 +95,29 @@ class quranCLI implements Callable<Integer> {
             JSONObject data = jsonObject.getJSONObject("data");
             //GET SURAH ARABIC NAME
             String name = data.getString("name");
-            verses.append(name).append("\n");
+            //verses.append(name).append("\n");
+            int w = 20;
+
+            System.out.println(StringUtils.rightPad("+", w - 1, "-") + "+");
+            System.out.println(StringUtils.center(StringUtils.center(name, w - 2), w, "|"));
+            System.out.println(StringUtils.rightPad("+", w - 1, "-") + "+");
+            System.out.println("\n");
             //GET THE ARABIC TEXT OF THE SURAH
             JSONArray ayahs = data.getJSONArray("ayahs");
             for (int i = 0; i < ayahs.length(); i++) {
                 JSONObject ayah = ayahs.getJSONObject(i);
                 String text = ayah.getString("text");
 //                System.out.println(text);
-                verses.append(text).append("\n");
+                verses.append(text).append("\n\n");
             }
 
         } catch (Exception e) {
             System.out.println(e);
         }
+        int width = 50;
+        System.out.println(StringUtils.rightPad("+", width - 1, "-") + "+");
+        System.out.println(StringUtils.center(StringUtils.center(verses.toString(), width - 2), width, "|"));
+        System.out.println(StringUtils.rightPad("+", width - 1, "-") + "+");
         return verses.toString();
     }
 
@@ -107,7 +125,7 @@ class quranCLI implements Callable<Integer> {
         String url = "https://api.alquran.cloud/v1/surah/"+surahNumber+"/ar.alafasy";
         String responses = makeRequest(url);
         ArrayList<String> Audiourl = new ArrayList<String>();
-        System.out.println(GetSurah(surahNumber));
+        GetSurah(surahNumber);
 
         try{
             JSONObject jsonObject = new JSONObject(responses);
@@ -175,7 +193,7 @@ class quranCLI implements Callable<Integer> {
     }
 
 
-    @Option(names = {"-s", "--surah-number"}, description = "find a surah by it's number in range 1..114", interactive = true)
+    @Option(names = {"-s", "--surah-number"}, description = "find a surah by it's number in range 1..114")
     private int surahNumber;
 
     @Option(names = {"-q", "--query"}, description = "Search a keyword in the quran")
@@ -197,7 +215,7 @@ class quranCLI implements Callable<Integer> {
                 System.out.println("Opps ! The Quran has 114 Surahs.\nUse \"quranCLI [command] --help\" for more information about a command.");
                 return 0;
             }
-            System.out.println(GetSurah(surahNumber));
+            GetSurah(surahNumber);
         }
         return 0;
     }
@@ -222,7 +240,3 @@ class quranCLI implements Callable<Integer> {
 //        System.exit(exitCode);
     }
 }
-
-/*
- java -cp .:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/info.picocli/picocli/4.6.1/49a67ee4b4d9722fa60f3f9ffaffa72861c32966/picocli-4.6.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/javazoom/jlayer/1.0.1/2bfef7a5a4c9af2184ff74b460b6d7d24349b98a/jlayer-1.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.0.0/ab5a73fa2ccb4a36b0b5c69fe10b16d0255bcf8/okio-jvm-3.0.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.7.0/a5f42c684ad9003160ef0d0f693ecf0ba7b13549/kotlin-stdlib-1.7.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/4.10.0/cd63657ac15770ed1420647154c9f44645533bef/okhttp-4.10.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.json/json/20220320/6df2c050972619466f6dcef7654ef9bcc01dfd0/json-20220320.jar /Users/ahmedsaheed/Desktop/Desktop/cmdWithJava/src/main/java/quranCLI.java
- */
