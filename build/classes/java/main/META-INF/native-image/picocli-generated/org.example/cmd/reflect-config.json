@@ -18,6 +18,7 @@
     "allPublicMethods" : true,
     "fields" : [
       { "name" : "a" },
+      { "name" : "query" },
       { "name" : "surahNumber" }
     ]
   }
