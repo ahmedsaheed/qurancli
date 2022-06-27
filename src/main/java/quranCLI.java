@@ -95,8 +95,9 @@ class quranCLI implements Callable<Integer> {
         StringBuilder verses = new StringBuilder();
         String name = "";
         AsciiTable at = new AsciiTable();
-
-
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_GREEN = "\u001B[32m";
+        String ANSI_YELLOW = "\u001B[33m";
         try {
             JSONObject jsonObject = new JSONObject(makeRequest(url));
             JSONObject data = jsonObject.getJSONObject("data");
@@ -111,8 +112,7 @@ class quranCLI implements Callable<Integer> {
             for (int i = 0; i < ayahs.length(); i++) {
                 JSONObject ayah = ayahs.getJSONObject(i);
                 String text = ayah.getString("text");
-                at.addRow(text + "\n").setTextAlignment(TextAlignment.LEFT);
-                //at.addRow(Ansi.AUTO.string("@|bold,fg_yellow "+text+"|@")).setTextAlignment(TextAlignment.LEFT);
+                at.addRow(  text +"\n" +ANSI_RESET + ANSI_GREEN ).setTextAlignment(TextAlignment.LEFT);
                 verses.append(text).append("\n\n");
             }
             at.addRule();
@@ -122,7 +122,7 @@ class quranCLI implements Callable<Integer> {
         }
 
         at.getContext().setGrid(A8_Grids.lineDoubleBlocks());
-        System.out.println(at.render(80));
+        System.out.println(ANSI_YELLOW+at.render(80)+ANSI_RESET);
 
     }
 
@@ -154,6 +154,53 @@ class quranCLI implements Callable<Integer> {
     public record search (String ArabicName, String EnglishName, String FoundText) {}
 
 
+    public static String getEnglishTranslation(int surahNumber){
+        String url = "https://api.alquran.cloud/v1/surah/"+surahNumber+"/en.ahmedraza";
+        AsciiTable at = new AsciiTable();
+        try{
+            JSONObject jsonObject = new JSONObject(makeRequest(url));
+            JSONObject data = jsonObject.getJSONObject("data");
+            String name = data.getString("englishName");
+            at.addRule();
+            at.addRow("English Name: "+name).setTextAlignment(TextAlignment.CENTER);
+            at.addRule();
+            JSONArray ayah = data.getJSONArray("ayahs");
+            StringBuilder englishTranslation = new StringBuilder();
+            for(int i = 0; i < ayah.length(); i++) {
+                JSONObject ayah_data = ayah.getJSONObject(i);
+                String text = ayah_data.getString("text");
+                at.addRow(text).setTextAlignment(TextAlignment.LEFT);
+                englishTranslation.append(text).append("\n\n");
+            }
+            at.addRule();
+            System.out.println(at.render());
+            return englishTranslation.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void getAudioTranslation(int surahNumber) throws IOException {
+        String url = "https://api.alquran.cloud/v1/surah/"+surahNumber+"/en.walk";
+        String responses = makeRequest(url);
+        ArrayList<String> Audiourl = new ArrayList<String>();
+        getEnglishTranslation(surahNumber);
+        try{
+            JSONObject jsonObject = new JSONObject(responses);
+            JSONObject data = jsonObject.getJSONObject("data");
+            JSONArray ayah = data.getJSONArray("ayahs");
+            for(int i = 0; i < ayah.length(); i++) {
+                JSONObject ayah_data = ayah.getJSONObject(i);
+                String audio = ayah_data.getString("audio");
+                Audiourl.add(audio);
+                playAudio(audio);
+
+            }
+        }catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
     public static ArrayList search(String keyword) throws IOException {
 
         int sum = 0;
@@ -205,6 +252,8 @@ class quranCLI implements Callable<Integer> {
 //    }
 
 
+
+
     @Option(names = {"-s", "--surah-number"}, description = "find a surah by it's number in range 1..114")
     private int surahNumber;
 
@@ -213,6 +262,13 @@ class quranCLI implements Callable<Integer> {
     @Option(names = {"-a", "--audio"}, description = "plays audio version of surah")
     boolean a;
 
+    @Option(names = {"-t", "--translation"}, description = "Translate surah to english")
+    boolean t;
+
+    @Option(names = {"-at", "--AudioTranslation"}, description = "Translate surah to english and play audio")
+    boolean at;
+
+
 
 
     @Override
@@ -220,16 +276,25 @@ class quranCLI implements Callable<Integer> {
 
         if(a) {
             getAudio(surahNumber);
-        }else if(query != null) {
+        }else if(t){
+            getEnglishTranslation(surahNumber);
+        }
+        else if(at){
+            getAudioTranslation(surahNumber);
+        }
+        else if(query != null) {
             System.out.println(search(query).toString());
-        }else{
+        }else {
             if (surahNumber < 1 || surahNumber > 114) {
                 System.out.println("Opps ! The Quran has 114 Surahs.\nUse \"quranCLI [command] --help\" for more information about a command.");
                 return 0;
             }
-            GetSurah(surahNumber);
+          GetSurah(surahNumber);
+
+
 
         }
+
         return 0;
     }
 
@@ -249,7 +314,7 @@ class quranCLI implements Callable<Integer> {
     // this example implements Callable, so parsing, error handling and handling user
     // requests for usage help or version help can be done with one line of code.
     public static void main(String... args) {
-        int exitCode = new CommandLine(new quranCLI()).setColorScheme(colorScheme).execute("-s","114", "-a");
+        int exitCode = new CommandLine(new quranCLI()).setColorScheme(colorScheme).execute("-s" ,"100", "-at");
 //        System.exit(exitCode);
     }
 }

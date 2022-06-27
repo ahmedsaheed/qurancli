@@ -18,8 +18,10 @@
     "allPublicMethods" : true,
     "fields" : [
       { "name" : "a" },
+      { "name" : "at" },
       { "name" : "query" },
-      { "name" : "surahNumber" }
+      { "name" : "surahNumber" },
+      { "name" : "t" }
     ]
   }
 ]
