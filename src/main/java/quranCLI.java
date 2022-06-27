@@ -314,7 +314,7 @@ class quranCLI implements Callable<Integer> {
     // this example implements Callable, so parsing, error handling and handling user
     // requests for usage help or version help can be done with one line of code.
     public static void main(String... args) {
-        int exitCode = new CommandLine(new quranCLI()).setColorScheme(colorScheme).execute("-s" ,"100", "-at");
+        int exitCode = new CommandLine(new quranCLI()).setColorScheme(colorScheme).execute(args);
 //        System.exit(exitCode);
     }
 }
