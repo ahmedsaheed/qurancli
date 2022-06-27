@@ -20,9 +20,19 @@ import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 
-@Command(name = "quranCLI", mixinStandardHelpOptions = true, version = "quranCLI 1.0",
+@Command(name = "quranCLI ", mixinStandardHelpOptions = true, version = "quranCLI 1.0",
+
         footer = "\nCopyright(c) quranCLI 2022",
-        description = "A simple tool to Read, Search and Recite the Quran\n")
+        description = """
+                      ______ ______
+                    _/      Q      \\_
+                   // ~~ ~~ | ~~ ~  \\\\
+                  // ~ ~ ~~ | ~~~ ~~ \\\\
+                 //________.|.________\\\\
+                `----------`-'----------'
+                       AL-QURAN CLI        \s
+                A simple tool to Read, Search and Recite the Quran.
+                """)
 class quranCLI implements Callable<Integer> {
     /*
     TO REBUILD
@@ -47,57 +57,11 @@ class quranCLI implements Callable<Integer> {
         return responses;
     }
 
-    static void GetFullQuran() {
-
-        try {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url("https://api.alquran.cloud/v1/quran/quran-uthmani")
-                    .build();
-            Response response = client.newCall(request).execute();
-            System.out.println(response.body().string());
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
-
-    static String GetJuz(int Juz) throws IOException {
-        StringBuilder juz = new StringBuilder();
-        StringBuilder juzz = new StringBuilder();
-        ArrayList<String> Sura = new ArrayList<String>();
-        String url = "http://api.alquran.cloud/v1/juz/" + Juz;
-        String responses = makeRequest(url);
-        JSONObject jsonObject = new JSONObject(responses);
-        JSONObject data = jsonObject.getJSONObject("data");
-        JSONArray surahs = data.getJSONArray("ayahs");
-
-        for(int i = 0; i < surahs.length(); i++) {
-            JSONObject surah = surahs.getJSONObject(i);
-            JSONObject surah_metadata = surah.getJSONObject("surah");
-            String name = surah_metadata.getString("name");
-            if(!Sura.contains(name)) {
-                Sura.add(name);
-            }
-            juz.append(surah.getString("text")).append("\n");
-        }
-        juzz.append("Juz number " +Juz+" contains ").append(Sura.size() + 1).append(" Suras\n");
-        for (String s : Sura) {
-            juzz.append(s).append(" | ");
-        }
-        juzz.append("\n\n" + juz.toString());
-
-        return juzz.toString();
-    }
-
     public static void GetSurah(int surahNumber) throws IOException {
         String url = "http://api.alquran.cloud/v1/surah/" + surahNumber;
         StringBuilder verses = new StringBuilder();
         String name = "";
         AsciiTable at = new AsciiTable();
-        String ANSI_RESET = "\u001B[0m";
-        String ANSI_GREEN = "\u001B[32m";
-        String ANSI_YELLOW = "\u001B[33m";
         try {
             JSONObject jsonObject = new JSONObject(makeRequest(url));
             JSONObject data = jsonObject.getJSONObject("data");
@@ -112,8 +76,7 @@ class quranCLI implements Callable<Integer> {
             for (int i = 0; i < ayahs.length(); i++) {
                 JSONObject ayah = ayahs.getJSONObject(i);
                 String text = ayah.getString("text");
-                at.addRow(  text +"\n" +ANSI_RESET + ANSI_GREEN ).setTextAlignment(TextAlignment.LEFT);
-                verses.append(text).append("\n\n");
+                at.addRow(  text +"\n").setTextAlignment(TextAlignment.LEFT);
             }
             at.addRule();
 
@@ -122,7 +85,7 @@ class quranCLI implements Callable<Integer> {
         }
 
         at.getContext().setGrid(A8_Grids.lineDoubleBlocks());
-        System.out.println(ANSI_YELLOW+at.render(80)+ANSI_RESET);
+        System.out.println(at.render(80));
 
     }
 
@@ -150,9 +113,6 @@ class quranCLI implements Callable<Integer> {
 
         return responses;
     }
-
-    public record search (String ArabicName, String EnglishName, String FoundText) {}
-
 
     public static String getEnglishTranslation(int surahNumber){
         String url = "https://api.alquran.cloud/v1/surah/"+surahNumber+"/en.ahmedraza";
@@ -201,33 +161,43 @@ class quranCLI implements Callable<Integer> {
         }
 
     }
-    public static ArrayList search(String keyword) throws IOException {
+    public static void search(String keyword) throws IOException {
 
-        int sum = 0;
-        ArrayList<search> Matches = new ArrayList<search>();
         String url = "http://api.alquran.cloud/v1/search/"+keyword+"/all/en";
-        String response = makeRequest(url);
-        JSONObject jsonObject = new JSONObject(response);
-        JSONObject data = jsonObject.getJSONObject("data");
-        JSONArray matched = data.getJSONArray("matches");
-        for(int i = 0; i < matched.length(); i++) {
-            JSONObject surah = matched.getJSONObject(i);
-            JSONObject surah_metadata = surah.getJSONObject("surah");
-            String name = surah_metadata.getString("name");
-            String Englishname = surah_metadata.getString("englishName");
-            String text = surah.getString("text");
-            int wordCount = surah.getInt("numberInSurah");
-//             System.out.println(name);
-//             System.out.println(Englishname);
-//             System.out.println(text);
-//             System.out.println(wordCount);
-//             sum += wordCount;
-//             System.out.println(sum);
-            Matches.add(new search(name, Englishname, text));
 
-        }
+        try {
+            String response = makeRequest(url);
+            JSONObject jsonObject = new JSONObject(response);
+            JSONObject data = jsonObject.getJSONObject("data");
+            JSONArray matched = data.getJSONArray("matches");
+            AsciiTable at = new AsciiTable();
+//            at.addRule();
+//            at.addRow("Search Results").setTextAlignment(TextAlignment.CENTER);
+            at.addRule();
+            at.addRow("Surah Name","Ayat", "Found Text");
+            at.addRule();
+                for (int i = 0; i < matched.length(); i++) {
+                    JSONObject surah = matched.getJSONObject(i);
+                    JSONObject surah_metadata = surah.getJSONObject("surah");
+                    String name = surah_metadata.getString("name");
+                    String Englishname = surah_metadata.getString("englishName");
+                    String text = surah.getString("text");
+                    int ayat = surah.getInt("numberInSurah");
+                    at.addRow(Englishname, ayat ,text);
+                    at.addRule();
 
-        return Matches;
+                }
+            System.out.println(at.render());
+
+            }catch(Exception e){
+                AsciiTable err = new AsciiTable();
+                err.addRule();
+                err.addRow("No matches found for word `" +keyword +"`").setTextAlignment(TextAlignment.CENTER);
+                err.addRule();
+                System.out.println(err.render());
+                System.exit(0);
+
+            }
     }
 
     public static void playAudio(String path) {
@@ -244,12 +214,12 @@ class quranCLI implements Callable<Integer> {
         }
     }
 
-//    public static void KEYLISTENER(KeyEvent e){
-//        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-//            System.out.println("Good Bye");
-//            System.exit(0);
-//        }
-//    }
+    public static void KEYLISTENER(KeyEvent e){
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            System.out.println("Good Bye");
+            System.exit(0);
+        }
+    }
 
 
 
@@ -283,7 +253,7 @@ class quranCLI implements Callable<Integer> {
             getAudioTranslation(surahNumber);
         }
         else if(query != null) {
-            System.out.println(search(query).toString());
+            search(query);
         }else {
             if (surahNumber < 1 || surahNumber > 114) {
                 System.out.println("Opps ! The Quran has 114 Surahs.\nUse \"quranCLI [command] --help\" for more information about a command.");
