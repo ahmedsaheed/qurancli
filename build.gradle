@@ -78,6 +78,10 @@ config {
         licenses {
             license {
                 id = 'Apache-2.0'
+                include "**/*.java"
+                exclude "**/*Test.java"
+                exclude "**/*.properties"
+
             }
         }
     }
