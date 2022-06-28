@@ -151,7 +151,6 @@ jreleaser {
                 // May be a relative path to the configuration file or an absolute path.
                 // If unspecified, JReleaser will automatically calculate the changelog.
                 //
-                external = 'path/to/changelog.md'
 
                 // Create explicit markdown links for commit hashes.
                 // Defaults to `false`.
@@ -180,7 +179,6 @@ jreleaser {
                 // Review the available Name Templates.
                 // Defaults to `src/jreleaser/templates/changelog.tpl`.
                 //
-                contentTemplate = 'path/to/template/changelog.tpl'
 
                 //
                 contributors {
@@ -375,7 +373,6 @@ jreleaser {
             // Defaults to `src/jreleaser/distributions/${distribution.name}/brew`.
             // If specified, path must exist.
             //
-            templateDirectory = 'path/to/brew/templates'
 
             // List of template files to be skipped.
             // Value may be an exact match or a regex.
@@ -527,7 +524,7 @@ jreleaser {
                 //
                 uninstall = [
                         pkgutil: [
-                                'com.acme.app'
+                                'com.example'
                         ]
                 ]
 
@@ -542,10 +539,6 @@ jreleaser {
         }
     }
 }
-
-gradle.startParameter.excludedTaskNames += "licenseMain"
-gradle.startParameter.excludedTaskNames += "licenseTest"
-
 
 
 compileJava {

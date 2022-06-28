@@ -1,0 +1,1136 @@
+[INFO]  JReleaser 1.0.0
+------------------------------------------------------------
+jreleaser 1.0.0
+------------------------------------------------------------
+Build time:   2022-04-10 05:32:17Z
+Revision:     7f1d20795da6d9d3498914857a36ce361c3cc9c0
+------------------------------------------------------------
+[INFO]    - basedir set to /Users/ahmedsaheed/Desktop/Desktop/quranCLI
+[DEBUG]   - baseOutputDirectory set to /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build
+[DEBUG]   - outputDirectory set to /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser
+[DEBUG]   - checksumDirectory set to /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/checksums
+[DEBUG]   - signaturesDirectory set to /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/signatures
+[DEBUG]   - prepareDirectory set to /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/prepare
+[DEBUG]   - packageDirectory set to /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/package
+[DEBUG]   - assembleDirectory set to /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/assemble
+[DEBUG]   - artifactsDirectory set to /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/artifacts
+[INFO]  Loading variables from /Users/ahmedsaheed/.jreleaser/config.properties
+[INFO]  Validating configuration
+[DEBUG] adjusting distributions with assemblies
+[DEBUG]   [validation] project
+[DEBUG]   [validation] assemble
+[DEBUG]   [validation] archive
+[DEBUG]   [validation] jlink
+[DEBUG]   [validation] jpackage
+[DEBUG]   [validation] nativeImage
+[DEBUG]   [validation] release
+[DEBUG]   [validation] release.github
+[DEBUG]   [validation] checksum
+[DEBUG]   [validation] upload
+[DEBUG]   [validation] artifactory
+[DEBUG]   [validation] http
+[DEBUG]   [validation] s3
+[DEBUG]   [validation] project
+[DEBUG]   [validation] assemble
+[DEBUG]   [validation] jpackage
+[DEBUG]   [resolution] assemble
+[DEBUG]   [resolution] archive
+[DEBUG]   [resolution] jlink
+[DEBUG]   [resolution] jpackage
+[DEBUG]   [resolution] nativeImage
+[DEBUG]   [validation] project
+[DEBUG]   [validation] project.java
+[DEBUG]   [validation] assemble
+[DEBUG]   [validation] archive
+[DEBUG]   [validation] jlink
+[DEBUG]   [validation] jpackage
+[DEBUG]   [validation] nativeImage
+[DEBUG]   [validation] signing
+[DEBUG]   [validation] release
+[DEBUG]   [validation] release.github
+[DEBUG]   [validation] checksum
+[DEBUG]   [validation] upload
+[DEBUG]   [validation] artifactory
+[DEBUG]   [validation] http
+[DEBUG]   [validation] s3
+[DEBUG]   [validation] packagers
+[DEBUG]   [validation] distributions
+[DEBUG]   [validation] distribution.app
+[DEBUG]   [validation] distribution.app.java
+[DEBUG]   [validation] files
+[DEBUG]   [validation] announce
+[DEBUG]   [validation] announce.webhooks
+[DEBUG]   [validation] project
+[DEBUG]   [validation] assemble
+[DEBUG]   [validation] jpackage
+[DEBUG]   [validation] distributions
+[DEBUG]   [validation] distribution.app
+environment:
+ 
+project:
+    name: cmd
+    version: 1.0-SNAPSHOT
+    versionPattern: semver
+    snapshot:
+        enabled: true
+        pattern: .*-SNAPSHOT
+        label: early-access
+        fullChangelog: false
+    description: A simple tool to Read, Search and Recite the Quran.
+    longDescription: A simple tool to Read, Search and Recite the Quran.
+    website: https://github.com/ahmedsaheed/quranCLI
+    docsUrl: https://github.com/ahmedsaheed/quranCLI
+    license: Apache-2.0
+    licenseUrl: https://spdx.org/licenses/Apache-2.0.html
+    copyright: 2022 Ahmed Saheed
+    authors:
+        Ahmed Saheed
+    extraProperties:
+        projectInceptionYear: 2022
+        projectVersionMajor: 1
+        projectVersionMinor: 0
+        projectVersionNumber: 1.0
+        projectVersionTag: SNAPSHOT
+        projectVersionWithUnderscores: 1_0_SNAPSHOT
+        projectVersionWithDashes: 1-0-SNAPSHOT
+        projectVersionNumberWithUnderscores: 1_0
+        projectVersionNumberWithDashes: 1-0
+        projectEffectiveVersionWithUnderscores: early_access
+        projectEffectiveVersionWithDashes: early-access
+    java:
+        enabled: true
+        version: 17
+        groupId: org.example
+        artifactId: cmd
+        mainClass: src/main/java/quranCLI.java
+        multiProject: false
+ 
+platform:
+ 
+release:
+    github:
+        enabled: true
+        host: github.com
+        owner: Ahmed Saheed
+        name: quranCLI
+        username: ahmedsaheed
+        token: ************
+        uploadAssets: always
+        artifacts: true
+        files: true
+        checksums: true
+        signatures: true
+        repoUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}
+        repoCloneUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}.git
+        commitUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/commits
+        srcUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/blob/{{repoBranch}}
+        downloadUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}
+        releaseNotesUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/tag/{{tagName}}
+        latestReleaseUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/latest
+        issueTrackerUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/issues
+        tagName: v1.0.0
+        releaseName: Release v1.0.0
+        branch: main
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        sign: false
+        skipTag: false
+        skipRelease: false
+        overwrite: true
+        update:
+            enabled: true
+            sections:
+                assets
+        apiEndpoint: https://api.github.com
+        connectTimeout: 20
+        readTimeout: 60
+        changelog:
+            enabled: true
+            links: false
+            sort: DESC
+            formatted: always
+            preset: gitmoji
+            format: - {{commitShortHash}} {{commitTitle}}
+            content: #Changelog
+
+{{changelogChanges}}
+{{changelogContributors}}
+            includeLabels:
+                issue
+            excludeLabels:
+                issue
+            hide:
+                uncategorized: true
+                categories:
+                    merge
+                contributors:
+                    [bot]
+            contributors:
+                enabled: true
+                format: - {{contributorName}} ({{contributorUsernameAsLink}})
+            categories:
+                category 0:
+                    key: merge
+                    title: 🔀 Merge
+                    labels:
+                        merge
+                    order: 0
+                category 1:
+                    key: features
+                    title: 🚀 Features
+                    labels:
+                        feature
+                        enhancement
+                    order: 1
+                category 2:
+                    key: fixes
+                    title: 🐛 Bug Fixes
+                    labels:
+                        bug
+                        fix
+                    format: - {{commitShortHash}} {{commitBody}}
+                    order: 2
+                category 3:
+                    key: added
+                    title: 🚀 Added
+                    labels:
+                        added
+                    order: 10
+                category 4:
+                    key: changed
+                    title: 🔄️ Changed
+                    labels:
+                        changed
+                    order: 20
+                category 5:
+                    key: breaking
+                    title: 🚨 Breaking
+                    labels:
+                        breaking_changes
+                    order: 30
+                category 6:
+                    key: deprecated
+                    title: 💥 Deprecated
+                    labels:
+                        deprecated
+                    order: 40
+                category 7:
+                    key: removed
+                    title: 🗑 Removed
+                    labels:
+                        removed
+                    order: 50
+                category 8:
+                    key: fixed
+                    title: 🐛 Fixed
+                    labels:
+                        fixed
+                    order: 60
+                category 9:
+                    key: security
+                    title: 🔒️ Security
+                    labels:
+                        security
+                    order: 70
+                category 10:
+                    key: deps
+                    title: 📦 Dependencies
+                    labels:
+                        dependencies
+                    order: 80
+                category 11:
+                    key: docs
+                    title: 📝 Documentation
+                    labels:
+                        documentation
+                    order: 90
+                category 12:
+                    key: misc
+                    title: 🎲 Miscellaneous
+                    labels:
+                        misc
+                    order: 100
+                category 13:
+                    key: release
+                    title: 🏁 Release
+                    labels:
+                        release
+                    order: 110
+            labelers:
+                labeler 0:
+                    label: issue
+                    title: regex:fix:
+                    body: Fixes #
+                    order: 1
+                labeler 1:
+                    label: documentation
+                    title: regex:^(📝|:memo:).*
+                labeler 2:
+                    label: documentation
+                    title: regex:^(🌐|:globe_with_meridians:).*
+                labeler 3:
+                    label: changed
+                    title: regex:^(♿️|:wheelchair:).*
+                labeler 4:
+                    label: misc
+                    title: regex:^(👥|:busts_in_silhouette:).*
+                labeler 5:
+                    label: fixed
+                    title: regex:^(🐧|:penguin:).*
+                labeler 6:
+                    label: changed
+                    title: regex:^(🍱|:bento:).*
+                labeler 7:
+                    label: fixed
+                    title: regex:^(💚|:green_heart:).*
+                labeler 8:
+                    label: misc
+                    title: regex:^(💩|:poop:).*
+                labeler 9:
+                    label: added
+                    title: regex:^(✨|:sparkles:).*
+                labeler 10:
+                    label: fixed
+                    title: regex:^(🍎|:apple:).*
+                labeler 11:
+                    label: misc
+                    title: regex:^(🚧|:construction:).*
+                labeler 12:
+                    label: misc
+                    title: regex:^(🥚|:egg:).*
+                labeler 13:
+                    label: added
+                    title: regex:^(✅|:white_check_mark:).*
+                labeler 14:
+                    label: changed
+                    title: regex:^(📱|:iphone:).*
+                labeler 15:
+                    label: misc
+                    title: regex:^(👔|:necktie:).*
+                labeler 16:
+                    label: added
+                    title: regex:^(📈|:chart_with_upwards_trend:).*
+                labeler 17:
+                    label: changed
+                    title: regex:^(⏪|:rewind:).*
+                labeler 18:
+                    label: security
+                    title: regex:^(🔒️|:lock:).*
+                labeler 19:
+                    label: misc
+                    title: regex:^(🙈|:see_no_evil:).*
+                labeler 20:
+                    label: changed
+                    title: regex:^(🔨|:hammer:).*
+                labeler 21:
+                    label: added
+                    title: regex:^(➕|:heavy_plus_sign:).*
+                labeler 22:
+                    label: security
+                    title: regex:^(🛂|:passport_control:).*
+                labeler 23:
+                    label: misc
+                    title: regex:^(📸|:camera_flash:).*
+                labeler 24:
+                    label: changed
+                    title: regex:^(📦|:package:).*
+                labeler 25:
+                    label: changed
+                    title: regex:^(🎨|:art:).*
+                labeler 26:
+                    label: documentation
+                    title: regex:^(📄|:page_facing_up:).*
+                labeler 27:
+                    label: added
+                    title: regex:^(👷|:construction_worker:).*
+                labeler 28:
+                    label: added
+                    title: regex:^(🔊|:loud_sound:).*
+                labeler 29:
+                    label: changed
+                    title: regex:^(🔧|:wrench:).*
+                labeler 30:
+                    label: merge
+                    title: Merge pull
+                labeler 31:
+                    label: changed
+                    title: regex:^(🚸|:children_crossing:).*
+                labeler 32:
+                    label: removed
+                    title: regex:^(🔥|:fire:).*
+                labeler 33:
+                    label: documentation
+                    title: regex:^(📝|:pencil:).*
+                labeler 34:
+                    label: release
+                    title: regex:^(🔖|:bookmark:).*
+                labeler 35:
+                    label: changed
+                    title: regex:^(👽|:alien:).*
+                labeler 36:
+                    label: merge
+                    title: regex:^(🔀|:twisted_rightwards_arrows:).*
+                labeler 37:
+                    label: changed
+                    title: regex:^(💄|:lipstick:).*
+                labeler 38:
+                    label: changed
+                    title: regex:^(🚚|:truck:).*
+                labeler 39:
+                    label: documentation
+                    title: regex:^(💡|:nulb:).*
+                labeler 40:
+                    label: changed
+                    title: regex:^(📌|:pushpin:).*
+                labeler 41:
+                    label: breaking_changes
+                    title: regex:^(💥|:boom:).*
+                labeler 42:
+                    label: deprecated
+                    title: regex:^(🗑|:wastebasket:).*
+                labeler 43:
+                    label: fixed
+                    title: regex:^(✏️|:pencil2:).*
+                labeler 44:
+                    label: fixed
+                    title: regex:^(🍏|:green_apple:).*
+                labeler 45:
+                    label: misc
+                    title: regex:^(🔍|:mag:).*
+                labeler 46:
+                    label: misc
+                    title: regex:^(🧪|:test_tube:).*
+                labeler 47:
+                    label: removed
+                    title: regex:^(⚰️|:coffin:).*
+                labeler 48:
+                    label: fixed
+                    title: regex:^(🚑|:ambulance:).*
+                labeler 49:
+                    label: changed
+                    title: regex:^(💬|:speech_balloon:).*
+                labeler 50:
+                    label: removed
+                    title: regex:^(➖|:heavy_minus_sign:).*
+                labeler 51:
+                    label: misc
+                    title: regex:^(⚗️|:alembic:).*
+                labeler 52:
+                    label: dependencies
+                    title: regex:^(⬆️|:arrow_up:).*
+                labeler 53:
+                    label: misc
+                    title: regex:^(👌|:ok_hand:).*
+                labeler 54:
+                    label: changed
+                    title: regex:^(⚡️|:zap:).*
+                labeler 55:
+                    label: changed
+                    title: regex:^(♻️|:recycle:).*
+                labeler 56:
+                    label: dependencies
+                    title: regex:^(⬇️|:arrow_down:).*
+                labeler 57:
+                    label: fixed
+                    title: regex:^(🤖|:robot:).*
+                labeler 58:
+                    label: release
+                    title: regex:^(🚀|:rocket:).*
+                labeler 59:
+                    label: changed
+                    title: regex:^(🚨|:rotating_light:).*
+                labeler 60:
+                    label: changed
+                    title: regex:^(🗃|:card_file_box:).*
+                labeler 61:
+                    label: added
+                    title: regex:^(🎉|:tada:).*
+                labeler 62:
+                    label: merge
+                    title: Merge branch
+                labeler 63:
+                    label: misc
+                    title: regex:^(🧐|:monocle_face:).*
+                labeler 64:
+                    label: removed
+                    title: regex:^(🔇|:mute:).*
+                labeler 65:
+                    label: misc
+                    title: regex:^(🍻|:beers:).*
+                labeler 66:
+                    label: fixed
+                    title: regex:^(🩹️|:adhesive_bandage:).*
+                labeler 67:
+                    label: misc
+                    title: regex:^(🤡|:clown_face:).*
+                labeler 68:
+                    label: fixed
+                    title: regex:^(🏁|:checkered_flag:).*
+                labeler 69:
+                    label: misc
+                    title: regex:^(🥅|:goal_net:).*
+                labeler 70:
+                    label: fixed
+                    title: regex:^(🐛|:bug:).*
+                labeler 71:
+                    label: changed
+                    title: regex:^(🏗|:building_construction:).*
+            replacers:
+                replacer 0:
+                    search: :twisted_rightwards_arrows:
+                    replace: 🔀
+                replacer 1:
+                    search: :sparkles:
+                    replace: ✨
+                replacer 2:
+                    search: :tada:
+                    replace: 🎉
+                replacer 3:
+                    search: :white_check_mark:
+                    replace: ✅
+                replacer 4:
+                    search: :construction_worker:
+                    replace: 👷
+                replacer 5:
+                    search: :chart_with_upwards_trend:
+                    replace: 📈
+                replacer 6:
+                    search: :heavy_plus_sign:
+                    replace: ➕
+                replacer 7:
+                    search: :loud_sound:
+                    replace: 🔊
+                replacer 8:
+                    search: :art:
+                    replace: 🎨
+                replacer 9:
+                    search: :zap:
+                    replace: ⚡️
+                replacer 10:
+                    search: :lipstick:
+                    replace: 💄
+                replacer 11:
+                    search: :rotating_light:
+                    replace: 🚨
+                replacer 12:
+                    search: :pushpin:
+                    replace: 📌
+                replacer 13:
+                    search: :recycle:
+                    replace: ♻️
+                replacer 14:
+                    search: :wrench:
+                    replace: 🔧
+                replacer 15:
+                    search: :hammer:
+                    replace: 🔨
+                replacer 16:
+                    search: :rewind:
+                    replace: ⏪
+                replacer 17:
+                    search: :alien:
+                    replace: 👽
+                replacer 18:
+                    search: :truck:
+                    replace: 🚚
+                replacer 19:
+                    search: :bento:
+                    replace: 🍱
+                replacer 20:
+                    search: :wheelchair:
+                    replace: ♿️
+                replacer 21:
+                    search: :speech_balloon:
+                    replace: 💬
+                replacer 22:
+                    search: :card_file_box:
+                    replace: 🗃
+                replacer 23:
+                    search: :children_crossing:
+                    replace: 🚸
+                replacer 24:
+                    search: :building_construction:
+                    replace: 🏗
+                replacer 25:
+                    search: :iphone:
+                    replace: 📱
+                replacer 26:
+                    search: :package:
+                    replace: 📦
+                replacer 27:
+                    search: :boom:
+                    replace: 💥
+                replacer 28:
+                    search: :wastebasket:
+                    replace: 🗑
+                replacer 29:
+                    search: :heavy_minus_sign:
+                    replace: ➖
+                replacer 30:
+                    search: :fire:
+                    replace: 🔥
+                replacer 31:
+                    search: :mute:
+                    replace: 🔇
+                replacer 32:
+                    search: :coffin:
+                    replace: ⚰️
+                replacer 33:
+                    search: :bug:
+                    replace: 🐛
+                replacer 34:
+                    search: :ambulance:
+                    replace: 🚑
+                replacer 35:
+                    search: :apple:
+                    replace: 🍎
+                replacer 36:
+                    search: :green_apple:
+                    replace: 🍏
+                replacer 37:
+                    search: :penguin:
+                    replace: 🐧
+                replacer 38:
+                    search: :checkered_flag:
+                    replace: 🏁
+                replacer 39:
+                    search: :robot:
+                    replace: 🤖
+                replacer 40:
+                    search: :green_heart:
+                    replace: 💚
+                replacer 41:
+                    search: :pencil2:
+                    replace: ✏️
+                replacer 42:
+                    search: :adhesive_bandage:
+                    replace: 🩹️
+                replacer 43:
+                    search: :lock:
+                    replace: 🔒️
+                replacer 44:
+                    search: :passport_control:
+                    replace: 🛂
+                replacer 45:
+                    search: :pencil:
+                    replace: 📝
+                replacer 46:
+                    search: :memo:
+                    replace: 📝
+                replacer 47:
+                    search: :globe_with_meridians:
+                    replace: 🌐
+                replacer 48:
+                    search: :page_facing_up:
+                    replace: 📄
+                replacer 49:
+                    search: :bulb:
+                    replace: 💡
+                replacer 50:
+                    search: :arrow_up:
+                    replace: ⬆️ 
+                replacer 51:
+                    search: :arrow_down:
+                    replace: ⬇️ 
+                replacer 52:
+                    search: :poop:
+                    replace: 💩
+                replacer 53:
+                    search: :construction:
+                    replace: 🚧
+                replacer 54:
+                    search: misc
+                    replace: 🍻:beers:
+                replacer 55:
+                    search: :busts_in_silhouette:
+                    replace: 👥
+                replacer 56:
+                    search: :clown_face:
+                    replace: 🤡
+                replacer 57:
+                    search: :egg:
+                    replace: 🥚
+                replacer 58:
+                    search: :see_no_evil:
+                    replace: 🙈
+                replacer 59:
+                    search: :camera_flash:
+                    replace: 📸
+                replacer 60:
+                    search: misc
+                    replace: ⚗️
+                replacer 61:
+                    search: :alembic:
+                    replace: 🔍:mag:
+                replacer 62:
+                    search: :goal_net:
+                    replace: 🥅
+                replacer 63:
+                    search: :monocle_face:
+                    replace: 🧐
+                replacer 64:
+                    search: :test_tube:
+                    replace: 🧪
+                replacer 65:
+                    search: :necktie:
+                    replace: 👔
+                replacer 66:
+                    search: :ok_hand:
+                    replace: 👌
+                replacer 67:
+                    search: :rocket:
+                    replace: 🚀
+                replacer 68:
+                    search: :bookmark:
+                    replace: 🔖
+        milestone:
+            name: {{tagName}}
+            close: true
+        prerelease:
+            enabled: true
+            pattern: .*-pre
+        draft: false
+        discussionCategoryName: Announcements
+ 
+checksum:
+    name: checksums.txt
+    individual: false
+    algorithms:
+        SHA_256
+    files: true
+ 
+signing:
+    enabled: false
+    active: never
+    armored: false
+    mode: memory
+    artifacts: true
+    files: true
+    checksums: true
+    passphrase: **unset**
+    publicKey: **unset**
+    secretKey: **unset**
+ 
+announce:
+    enabled: false
+    article:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        commitAuthor:
+        repository:
+            enabled: false
+            name: article
+            token: **unset**
+    discord:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        webhook: **unset**
+    discussions:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+    gitter:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        webhook: **unset**
+    googlechat:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        webhook: **unset**
+    mail:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        auth: false
+        password: **unset**
+    mastodon:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        accessToken: **unset**
+    mattermost:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        webhook: **unset**
+    sdkman:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        consumerKey: **unset**
+        consumerToken: **unset**
+        extraProperties:
+            sdkman__MAGIC_SET__: true
+    slack:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        webhook: **unset**
+        token: **unset**
+    teams:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        webhook: **unset**
+    telegram:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        token: **unset**
+        chatId: **unset**
+    twitter:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        consumerKey: **unset**
+        consumerSecret: **unset**
+        accessToken: **unset**
+        accessTokenSecret: **unset**
+    zulip:
+        enabled: false
+        active: never
+        connectTimeout: 0
+        readTimeout: 0
+        apiKey: **unset**
+ 
+packagers:
+    brew:
+        enabled: false
+        active: never
+        continueOnError: false
+        downloadUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}
+        skipTemplates:
+            README.md.tpl
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        formulaName: App
+        multiPlatform: false
+        tap:
+            enabled: true
+            active: always
+            owner: Ahmed Saheed
+            name: ahmedsaheed
+            tagName: {{distributionName}} {{tagName}}
+            branch: HEAD
+            username: ahmedsaheed
+            token: ************
+            commitMessage: {{distributionName}} {{tagName}}
+        dependencies:
+            :key1 => "value1"
+            "key2" => "value2"
+            :key3
+            "key4"
+        livecheck:
+            url "https://host/sparkle/appcast-release.xml"
+            strategy :sparkle
+        cask:
+            enabled: true
+            name: quranCLI
+            displayName: quranCLI
+            appName: quranCLI.app
+            pkgName: app-1.0.0.pkg
+            appcast: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases.atom
+            uninstall:
+                pkgutil:
+                    com.example
+            zap:
+                trash:
+                    ~/Library/Caches/App
+        extraProperties:
+            brewFoo: bar
+    chocolatey:
+        enabled: false
+        active: never
+        continueOnError: false
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        apiKey: **unset**
+        remoteBuild: false
+        bucket:
+            enabled: false
+            active: release
+            owner: Ahmed Saheed
+            name: chocolatey-bucket
+            tagName: v1.0.0
+            branch: HEAD
+            username: ahmedsaheed
+            token: ************
+    docker:
+        enabled: false
+        active: never
+        useLocalArtifact: true
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        repository:
+            enabled: false
+            active: release
+            owner: Ahmed Saheed
+            name: docker
+            tagName: v1.0.0
+            branch: HEAD
+            username: ahmedsaheed
+            token: ************
+            versionedSubfolders: false
+        continueOnError: false
+    gofish:
+        enabled: false
+        active: never
+        continueOnError: false
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        repository:
+            enabled: false
+            active: release
+            owner: Ahmed Saheed
+            name: Ahmed Saheed-fish-food
+            tagName: v1.0.0
+            branch: HEAD
+            username: ahmedsaheed
+            token: ************
+    jbang:
+        enabled: false
+        active: never
+        continueOnError: false
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        catalog:
+            enabled: false
+            active: release
+            owner: Ahmed Saheed
+            name: jbang-catalog
+            tagName: v1.0.0
+            branch: HEAD
+            username: ahmedsaheed
+            token: ************
+    macports:
+        enabled: false
+        active: never
+        continueOnError: false
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        repository:
+            enabled: false
+            active: release
+            owner: Ahmed Saheed
+            name: macports
+            tagName: v1.0.0
+            branch: HEAD
+            username: ahmedsaheed
+            token: ************
+    scoop:
+        enabled: false
+        active: never
+        continueOnError: false
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        bucket:
+            enabled: false
+            active: release
+            owner: Ahmed Saheed
+            name: scoop-Ahmed Saheed
+            tagName: v1.0.0
+            branch: HEAD
+            username: ahmedsaheed
+            token: ************
+    sdkman:
+        enabled: false
+        active: never
+        continueOnError: false
+        connectTimeout: 20
+        readTimeout: 60
+        consumerKey: **unset**
+        consumerToken: **unset**
+    snap:
+        enabled: false
+        active: never
+        continueOnError: false
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        base: core20
+        grade: stable
+        confinement: strict
+        remoteBuild: false
+        snap:
+            enabled: false
+            active: release
+            owner: Ahmed Saheed
+            name: snap
+            tagName: v1.0.0
+            branch: HEAD
+            username: ahmedsaheed
+            token: ************
+    spec:
+        enabled: false
+        active: never
+        continueOnError: false
+        commitAuthor:
+            name: Ahmed Saheed
+            email: saheed@quranCLI.com
+        repository:
+            enabled: false
+            active: release
+            owner: Ahmed Saheed
+            name: Ahmed Saheed-spec
+            tagName: v1.0.0
+            branch: HEAD
+            username: ahmedsaheed
+            token: ************
+ 
+assemble:
+    enabled: false
+ 
+upload:
+    enabled: false
+ 
+distributions:
+    app:
+        enabled: true
+        active: always
+        type: JAVA_BINARY
+        executable:
+            name: app
+            windowsExtension: bat
+        platform:
+        artifacts:
+            artifact 0:
+                path: /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/distributions/{{distributionName}}-{{projectVersion}}.zip
+        java:
+            enabled: true
+            version: 17
+            groupId: org.example
+            artifactId: app
+            mainClass: src/main/java/quranCLI.java
+            multiProject: false
+        brew:
+            enabled: false
+            active: never
+            continueOnError: false
+            commitAuthor:
+            multiPlatform: false
+            tap:
+                enabled: false
+                name: homebrew-tap
+                token: **unset**
+            cask:
+                enabled: false
+        chocolatey:
+            enabled: false
+            active: never
+            continueOnError: false
+            commitAuthor:
+            apiKey: **unset**
+            remoteBuild: false
+            bucket:
+                enabled: false
+                name: chocolatey-bucket
+                token: **unset**
+        docker:
+            enabled: false
+            active: never
+            useLocalArtifact: true
+            commitAuthor:
+            repository:
+                enabled: false
+                name: docker
+                token: **unset**
+                versionedSubfolders: false
+            continueOnError: false
+        gofish:
+            enabled: false
+            active: never
+            continueOnError: false
+            commitAuthor:
+            repository:
+                enabled: false
+                name: fish-food
+                token: **unset**
+        jbang:
+            enabled: false
+            active: never
+            continueOnError: false
+            commitAuthor:
+            catalog:
+                enabled: false
+                name: jbang-catalog
+                token: **unset**
+        macports:
+            enabled: false
+            active: never
+            continueOnError: false
+            commitAuthor:
+            repository:
+                enabled: false
+                name: macports
+                token: **unset**
+        scoop:
+            enabled: false
+            active: never
+            continueOnError: false
+            commitAuthor:
+            bucket:
+                enabled: false
+                name: scoop
+                token: **unset**
+        sdkman:
+            enabled: false
+            active: never
+            continueOnError: false
+            connectTimeout: 0
+            readTimeout: 0
+            consumerKey: **unset**
+            consumerToken: **unset**
+        snap:
+            enabled: false
+            active: never
+            continueOnError: false
+            commitAuthor:
+            base: core20
+            grade: stable
+            confinement: strict
+            remoteBuild: false
+            snap:
+                enabled: false
+                name: snap
+                token: **unset**
+        spec:
+            enabled: false
+            active: never
+            continueOnError: false
+            commitAuthor:
+            repository:
+                enabled: false
+                name: spec
+                token: **unset**
+ 
+[INFO]  Project version set to 1.0-SNAPSHOT
+[INFO]  Release is snapshot
+[INFO]  Timestamp is 2022-06-28T05:19:07.310638+01:00
+[INFO]  HEAD is at eeda291
+[INFO]  Platform is osx-x86_64
+[INFO]  Writing output properties to build/jreleaser/output.properties

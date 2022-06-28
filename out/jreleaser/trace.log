@@ -565,9 +565,3 @@ distributions:
                 name: spec
                 token: **unset**
  
-[INFO]  Project version set to 1.0.0-SNAPSHOT
-[INFO]  Release is snapshot
-[INFO]  Timestamp is 2022-06-28T03:39:42.529644+01:00
-[INFO]  HEAD is at 236bc17
-[INFO]  Platform is osx-x86_64
-[INFO]  Writing output properties to out/jreleaser/output.properties
