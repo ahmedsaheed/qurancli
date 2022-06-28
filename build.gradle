@@ -447,7 +447,7 @@ jreleaser {
             // The class name of the generated formula.
             // If left unspecified, will use `{{projectNameCapitalized}}`.
             //
-            formulaName = 'App'
+            formulaName = 'quranCLI'
 
             // Create a formula that supports OSX & Linux.
             // Applicable to distributions of type [JLINK, NATIVE_IMAGE, BINARY].

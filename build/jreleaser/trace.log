@@ -68,7 +68,7 @@ Revision:     7f1d20795da6d9d3498914857a36ce361c3cc9c0
 environment:
  
 project:
-    name: cmd
+    name: quranCLI
     version: 1.0-SNAPSHOT
     versionPattern: semver
     snapshot:
@@ -101,7 +101,7 @@ project:
         enabled: true
         version: 17
         groupId: org.example
-        artifactId: cmd
+        artifactId: quranCLI
         mainClass: src/main/java/quranCLI.java
         multiProject: false
  
@@ -1128,9 +1128,3 @@ distributions:
                 name: spec
                 token: **unset**
  
-[INFO]  Project version set to 1.0-SNAPSHOT
-[INFO]  Release is snapshot
-[INFO]  Timestamp is 2022-06-28T05:19:07.310638+01:00
-[INFO]  HEAD is at eeda291
-[INFO]  Platform is osx-x86_64
-[INFO]  Writing output properties to build/jreleaser/output.properties
