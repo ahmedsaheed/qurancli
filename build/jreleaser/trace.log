@@ -1146,7 +1146,103 @@ distributions:
  
 [INFO]  Project version set to 1.0-SNAPSHOT
 [INFO]  Release is snapshot
-[INFO]  Timestamp is 2022-06-28T16:10:55.65573+01:00
-[INFO]  HEAD is at c06da51
+[INFO]  Timestamp is 2022-06-28T16:11:44.124288+01:00
+[INFO]  HEAD is at b141e59
 [INFO]  Platform is osx-x86_64
+[INFO]  dry-run set to false
+[DEBUG] resolving commits
+[DEBUG] looking for tag that matches 'early-access'
+[DEBUG] looking for previous tag 'v0.9.0'
+[DEBUG] found tag early-access
+[DEBUG] sorting commits DESC
+[DEBUG] looking up user for Ahmed Saheed <ahmedsaheed2@outlook.com>
+[INFO]  Generating changelog: build/jreleaser/release/CHANGELOG.md
+[DEBUG] #Changelog
+
+
+## Contributors
+We'd like to thank the following people for their contributions:
+- Ahmed Saheed ([@ahmedsaheed](https://github.com/ahmedsaheed))
+[INFO]  Calculating checksums
+[DEBUG]   [checksum] reading build/jreleaser/checksums/app/quranCLI-1.0-SNAPSHOT.zip.sha256
+[INFO]    [checksum] All checksums are up-to-date. Skipping
+[INFO]  Signing files
+[INFO]    [sign] Signing is not enabled. Skipping
+[INFO]  Uploading is not enabled. Skipping
+[INFO]  Releasing to https://github.com/ahmedsaheed/quranCLI
+[DEBUG] looking up release with tag early-access at repository ahmedsaheed/quranCLI
+[DEBUG] fetching release on ahmedsaheed/quranCLI with tag early-access
+[DEBUG] release early-access exists
+[DEBUG] deleting release early-access
+[DEBUG] creating release early-access
+[DEBUG] deleting tag early-access from ahmedsaheed/quranCLI
+[DEBUG] tagging local repository with early-access
+[DEBUG] creating release on ahmedsaheed/quranCLI with tag early-access
+[INFO]   - uploading quranCLI-1.0-SNAPSHOT.zip
+[INFO]   - uploading checksums_sha256.txt
+[INFO]  Preparing distributions
+[INFO]    - Preparing app distribution
+[INFO]      [brew] preparing app distribution
+[DEBUG]     [brew] creating props for app/brew
+[DEBUG]     [brew] filling distribution properties into props
+[DEBUG]     [brew] filling git properties into props
+[DEBUG]     [brew] filling artifact properties into props
+[DEBUG]     [brew] filling packager properties into props
+[DEBUG]     [brew] resolving templates for app/brew
+[DEBUG]     [brew] resolving templates from classpath
+[DEBUG]     [brew] resolving template from classpath for java-binary.brew-snapshot
+[DEBUG]     [brew] resolving template from classpath for java-binary.brew
+[DEBUG]     [brew] resolving template from classpath for java-binary/brew/cask.rb.tpl
+[DEBUG]     [brew] resolving template from classpath for java-binary/brew/README.md.tpl
+[DEBUG]     [brew] resolving template from classpath for java-binary/brew/formula.rb.tpl
+[DEBUG]     [brew] evaluating template cask.rb.tpl for app/brew
+[DEBUG]     [brew] writing template cask.rb.tpl for app/brew
+[DEBUG]     [brew] evaluating template README.md.tpl for app/brew
+[DEBUG]     [brew] writing template README.md.tpl for app/brew
+[DEBUG]     [brew] evaluating template formula.rb.tpl for app/brew
+[DEBUG]     [brew] writing template formula.rb.tpl for app/brew
+[DEBUG]     [brew] copying license files
+[DEBUG]     [chocolatey] skipping for app distribution
+[DEBUG]     [docker] skipping for app distribution
+[DEBUG]     [gofish] skipping for app distribution
+[DEBUG]     [jbang] skipping for app distribution
+[DEBUG]     [macports] skipping for app distribution
+[DEBUG]     [scoop] skipping for app distribution
+[DEBUG]     [sdkman] skipping for app distribution
+[DEBUG]     [snap] skipping for app distribution
+[DEBUG]     [spec] skipping for app distribution
+[INFO]  Packaging distributions
+[INFO]    - Packaging app distribution
+[INFO]      [brew] packaging app distribution
+[DEBUG]     [brew] creating props for app/brew
+[DEBUG]     [brew] filling distribution properties into props
+[DEBUG]     [brew] filling git properties into props
+[DEBUG]     [brew] filling artifact properties into props
+[DEBUG]     [brew] filling packager properties into props
+[DEBUG]     [brew] copying files from /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/prepare/app/brew to /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/package/app/brew
+[DEBUG]     [chocolatey] skipping for app distribution
+[DEBUG]     [docker] skipping for app distribution
+[DEBUG]     [gofish] skipping for app distribution
+[DEBUG]     [jbang] skipping for app distribution
+[DEBUG]     [macports] skipping for app distribution
+[DEBUG]     [scoop] skipping for app distribution
+[DEBUG]     [sdkman] skipping for app distribution
+[DEBUG]     [snap] skipping for app distribution
+[DEBUG]     [spec] skipping for app distribution
+[INFO]  Publishing distributions
+[INFO]    - Publishing app distribution
+[INFO]      [brew] publishing app distribution
+[INFO]      [brew] publication of snapshots is not allowed. Skipping.
+[DEBUG]     [chocolatey] skipping for app distribution
+[DEBUG]     [docker] skipping for app distribution
+[DEBUG]     [gofish] skipping for app distribution
+[DEBUG]     [jbang] skipping for app distribution
+[DEBUG]     [macports] skipping for app distribution
+[DEBUG]     [scoop] skipping for app distribution
+[DEBUG]     [sdkman] skipping for app distribution
+[DEBUG]     [snap] skipping for app distribution
+[DEBUG]     [spec] skipping for app distribution
+[INFO]  Announcing release
+[INFO]  Announcing is not enabled. Skipping
 [INFO]  Writing output properties to build/jreleaser/output.properties
+[INFO]  JReleaser succeeded after 7.061 s
