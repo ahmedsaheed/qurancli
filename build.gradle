@@ -289,8 +289,6 @@ jreleaser {
 //                }
                 }
 
-                // A milestone associated with the release
-                //
                 milestone {
                     // Close the milestone (if it exists and still open) upon release.
                     // Defaults to `true`.
@@ -299,33 +297,13 @@ jreleaser {
 
                     name = '{{tagName}}'
                 }
-
-                // The following properties define  URL formats.
-                // Defaults are shown.
-                // Review the available Name Templates.
-
-                //
                 repoUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}'
-
-                //
                 repoCloneUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}.git'
-
-                //
                 commitUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/commits'
-
-                //
                 srcUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/blob/{{repoBranch}}'
-
-                //
                 downloadUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}'
-
-                //
                 releaseNotesUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/tag/{{tagName}}'
-
-                //
                 latestReleaseUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/latest'
-
-                //
                 issueTrackerUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/issues'
             }
 
@@ -348,114 +326,25 @@ jreleaser {
     packagers {
         //
         brew {
-            // Enables or disables Homebrew.
-            // Valid values are [`NEVER`, `ALWAYS`, `RELEASE`, `SNAPSHOT`].
-            // Defaults to `NEVER`.
-            //
             active = 'ALWAYS'
-
-            // Let the release continue if the packager fails.
-            // Defaults to `false`.
-            //
             continueOnError = false
-
-            // Custom download URL.
-            //
-
-            // Additional properties used when evaluating templates.
-            // Key will be capitalized and prefixed with `brew`, i.e, `brewFoo`.
-            //
-//            extraProperties.put('foo', 'bar')
-
-            // Directory with file templates used to prepare the Homebrew distribution.
-            // Defaults to `src/jreleaser/distributions/${distribution.name}/brew`.
-            // If specified, path must exist.
-            //
-
-            // List of template files to be skipped.
-            // Value may be an exact match or a regex.
-            //
             skipTemplate('README.md.tpl')
-
-            // Git author used to commit to the repository.
-            //
             commitAuthor {
-                // Name used when authoring commits.
-                // Defaults to `jreleaserbot`.
-                //
                 name = 'Ahmed Saheed'
-
-                // E-mail used when authoring commits.
-                // Defaults to `jreleaser@kordamp.org`.
-                //
                 email = 'saheed@quranCLI.com'
             }
-
-            // Git repository to push the formula to.
-            // Defaults are shown.
-            //
             repoTap {
-                // Enables or disables the repoTap.
-                // Valid values are [`NEVER`, `ALWAYS`, `RELEASE`, `SNAPSHOT`].
-                // Defaults to `RELEASE`.
-                //
                 active = 'ALWAYS'
-
-
-                // The owner of the repoTap.
-                // Defaults to the same owner as the release repository.
-                //
                 owner = 'ahmedsaheed'
-
-                // The name of the repoTap.
-                // Defaults to `homebrew-tap`.
-                //
                 name = 'homebrew-tap'
-
-                // The tag associated with the formula.
-                // If left unspecified, will use `{{tagName}}`.
-                //
                 tagName = '{{distributionName}} {{tagName}}'
-
-                // The target branch to use.
-                // May define a `JRELEASER_BRANCH` environment variable instead.
-                // Defaults to the branch pointed by HEAD.
-                //
                 branch = 'HEAD'
-
-                // Username used for authoring commits. Must have write access to the repoTap.
-                // If left unspecified, the `JRELEASER_HOMEBREW_${GIT}_USERNAME`
-                // environment variable must be defined.
-                // Defaults to the same username as the release repository.
-                //
                 username = 'ahmedsaheed'
-
-                // Password or OAuth token with write access to the repoTap.
-                // If left unspecified, the `JRELEASER_HOMEBREW_${GIT}_TOKEN`
-                // environment variable must be defined.
-                //
-//                token = JRELEASER_HOMEBREW_GITHUB_TOKEN
-//
-//                    # Message when committing to the repoTap.
-//                    # If left unspecified, `{{distributionName}} {{tagName}}` will be used.
-//                    #
+//              token = JRELEASER_HOMEBREW_GITHUB_TOKEN
                 commitMessage = '{{distributionName}} {{tagName}}'
+//                formulaName = 'quranCLI'
             }
-
-            // The class name of the generated formula.
-            // If left unspecified, will use `{{projectNameCapitalized}}`.
-            //
-            formulaName = 'quranCLI'
-
-            // Create a formula that supports OSX & Linux.
-            // Applicable to distributions of type [JLINK, NATIVE_IMAGE, BINARY].
-            // Default is `false`.
-            //
             multiPlatform = false
-
-            // Customize the livecheck block.
-            // Default is empty.
-            //
             livecheck = [
                     'url "https://host/sparkle/appcast-release.xml"',
                     'strategy :sparkle']
