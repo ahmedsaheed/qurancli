@@ -90,13 +90,12 @@ config {
 jreleaser {
     release {
         github {
-            owner = 'Ahmed Saheed'
+            owner = 'ahmedsaheed'
             name = 'quranCLI'
             overwrite = true
             enabled = true
             connectTimeout = 20
             readTimeout = 60
-            owner = 'Ahmed Saheed'
             host = 'github.com'
             username = 'ahmedsaheed'
             apiEndpoint = 'https://api.github.com'
@@ -356,7 +355,7 @@ jreleaser {
             // Valid values are [`NEVER`, `ALWAYS`, `RELEASE`, `SNAPSHOT`].
             // Defaults to `NEVER`.
             //
-            active = 'NEVER'
+            active = 'ALWAYS'
 
             // Let the release continue if the packager fails.
             // Defaults to `false`.
@@ -370,7 +369,7 @@ jreleaser {
             // Additional properties used when evaluating templates.
             // Key will be capitalized and prefixed with `brew`, i.e, `brewFoo`.
             //
-            extraProperties.put('foo', 'bar')
+//            extraProperties.put('foo', 'bar')
 
             // Directory with file templates used to prepare the Homebrew distribution.
             // Defaults to `src/jreleaser/distributions/${distribution.name}/brew`.
@@ -420,7 +419,7 @@ jreleaser {
                 // The tag associated with the formula.
                 // If left unspecified, will use `{{tagName}}`.
                 //
-                tagName = '{{distributionName}} {{tagName}}'
+//                tagName = '{{distributionName}} {{tagName}}'
 
                 // The target branch to use.
                 // May define a `JRELEASER_BRANCH` environment variable instead.
