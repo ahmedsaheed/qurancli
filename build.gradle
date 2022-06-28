@@ -340,8 +340,11 @@ jreleaser {
 
     distributions {
         app {
+            executable{
+                name = 'quranCLI'
+            }
             artifact {
-                path = 'build/distributions/{{distributionName}}-{{projectVersion}}.zip'
+                path = 'build/distributions/{{name}}-{{projectVersion}}.zip'
             }
         }
     }
@@ -508,7 +511,7 @@ jreleaser {
                 // Relative path to the .pkg file.
                 // If left unspecified, will use the filename of the .pkg file.
                 //
-                pkgName = 'app-1.0.0.pkg'
+                pkgName = 'quranCLI-1.0.0.pkg'
 
                 // Name of the application folder.
                 // If left unspecified, will use `{{brewFormulaName}}.app`.
@@ -539,7 +542,8 @@ jreleaser {
         }
     }
 }
-
+gradle.startParameter.excludedTaskNames += "licenseMain"
+gradle.startParameter.excludedTaskNames += "licenseTest"
 
 compileJava {
     options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
