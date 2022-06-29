@@ -588,8 +588,8 @@ distributions:
  
 [INFO]  Project version set to 1.0
 [INFO]  Release is not snapshot
-[INFO]  Timestamp is 2022-06-29T06:27:08.961006+01:00
-[INFO]  HEAD is at 015ebd4
+[INFO]  Timestamp is 2022-06-29T06:31:19.685319+01:00
+[INFO]  HEAD is at 12b9d23
 [INFO]  Platform is osx-x86_64
 [INFO]  dry-run set to false
 [INFO]  Calculating checksums
@@ -655,10 +655,9 @@ distributions:
 [DEBUG]     [brew] locating repository ahmedsaheed/ahmedsaheed
 [DEBUG]     [brew] lookup repository ahmedsaheed/ahmedsaheed
 [DEBUG]     [brew] lookup repository ahmedsaheed/ahmedsaheed
-[DEBUG]     [brew] creating repository ahmedsaheed/ahmedsaheed
-[DEBUG]     [brew] cloning https://github.com/ahmedsaheed/ahmedsaheed.git
+[DEBUG]     [brew] cloning https://github.com/ahmedsaheed/homebrew-tap.git
 [DEBUG]     [brew] copying files from build/jreleaser/package/qurancli/brew
-[DEBUG]     [brew] copying files from /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/package/qurancli/brew to /var/folders/f5/pq2yg6v5463gg4_kbf2n9f180000gn/T/jreleaser-ahmedsaheed18117164176389190933
+[DEBUG]     [brew] copying files from /Users/ahmedsaheed/Desktop/Desktop/quranCLI/build/jreleaser/package/qurancli/brew to /var/folders/f5/pq2yg6v5463gg4_kbf2n9f180000gn/T/jreleaser-ahmedsaheed10399897086645893704
 [DEBUG]     [brew] setting up commit
 [DEBUG]     [brew] tagging local repository with qurancli
 [INFO]      [brew] pushing to ahmedsaheed/ahmedsaheed
@@ -673,4 +672,4 @@ distributions:
 [DEBUG]     [snap] skipping for qurancli distribution
 [DEBUG]     [spec] skipping for qurancli distribution
 [INFO]  Writing output properties to build/jreleaser/output.properties
-[INFO]  JReleaser succeeded after 3.305 s
+[INFO]  JReleaser succeeded after 2.416 s
