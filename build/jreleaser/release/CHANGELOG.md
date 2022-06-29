@@ -1,5 +1,9 @@
 ## Changelog
 
+c948f5b rebuild
+d3e7dc9 fix sha
+12b9d23 fix mainclass path
+015ebd4 removed uneeded files
 c512a82 remove unecessary files
 6da2bf1 remove unecessary files
 1c1c6d9 updated build.gradle

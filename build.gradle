@@ -177,6 +177,24 @@ jreleaser {
             formulaName = 'qurancli'
             multiPlatform = true
         }
+        gofish {
+            active = 'ALWAYS'
+            continueOnError = false
+            downloadUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}'
+            commitAuthor {
+                name = 'Ahmed Saheed'
+                email = 'saheed@quranCLI.com'
+            }
+            repository {
+                active = 'ALWAYS'
+                owner = 'ahmedsaheed'
+                name = 'qurancli-fish-food'
+                tagName = '{{distributionName}} {{tagName}}'
+                branch = 'HEAD'
+                username = 'ahmedsaheed'
+                commitMessage = '{{distributionName}} {{tagName}}'
+            }
+        }
     }
 }
 gradle.startParameter.excludedTaskNames += "licenseMain"
