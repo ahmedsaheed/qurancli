@@ -71,7 +71,7 @@ set CLASSPATH=%APP_HOME%\lib\quranCLI-1.0.jar;%APP_HOME%\lib\okhttp-4.10.0.jar;%
 
 
 @rem Execute quranCLI
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %QURAN_CLI_OPTS%  -classpath "%CLASSPATH%" src/main/java/quranCLI.java %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %QURAN_CLI_OPTS%  -classpath "%CLASSPATH%" org.example.quranCLI %*
 
 :end
 @rem End local scope for the variables with windows NT shell

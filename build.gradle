@@ -29,7 +29,7 @@ tasks.withType(Javadoc) {
 }
 
 application {
-    mainClass = 'src/main/java/quranCLI.java'
+    mainClass = 'org.example.quranCLI'
 }
 
 dependencies {
@@ -146,7 +146,7 @@ jreleaser {
     distributions {
         app {
             active = 'ALWAYS'
-            name = 'quranCLI'
+            name = 'qurancli'
             executable {
                 name = 'quranCLI'
             }
@@ -169,12 +169,12 @@ jreleaser {
                 active = 'ALWAYS'
                 owner = 'ahmedsaheed'
                 name = 'homebrew-tap'
-                tagName = '{{distributionName}} {{tagName}}'
+                tagName = '{{distributionName}} {{formulaName}}'
                 branch = 'HEAD'
                 username = 'ahmedsaheed'
                 commitMessage = '{{distributionName}} {{tagName}}'
             }
-            formulaName = 'quranCLI'
+            formulaName = 'qurancli'
             multiPlatform = true
         }
     }

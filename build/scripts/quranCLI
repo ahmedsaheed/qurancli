@@ -201,7 +201,7 @@ fi
 
 set -- \
         -classpath "$CLASSPATH" \
-        src/main/java/quranCLI.java \
+        org.example.quranCLI \
         "$@"
 
 # Use "xargs" to parse quoted args.
