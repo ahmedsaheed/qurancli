@@ -124,14 +124,7 @@ jreleaser {
 
                 discussionCategoryName = 'Announcements'
                 commitAuthor {
-                    // Name used when authoring commits.
-                    // Defaults to `jreleaserbot`.
-                    //
                     name = 'Ahmed Saheed'
-
-                    // E-mail used when authoring commits.
-                    // Defaults to `jreleaser@kordamp.org`.
-                    //
                     email = 'saheed@quranCLI.com'
                 }
 
@@ -152,6 +145,8 @@ jreleaser {
 
     distributions {
         app {
+            active = 'ALWAYS'
+            name = 'quranCLI'
             executable {
                 name = 'quranCLI'
             }
@@ -162,11 +157,10 @@ jreleaser {
     }
 
     packagers {
-        //
         brew {
             active = 'ALWAYS'
             continueOnError = false
-            skipTemplate('README.md.tpl')
+            downloadUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}'
             commitAuthor {
                 name = 'Ahmed Saheed'
                 email = 'saheed@quranCLI.com'
@@ -178,10 +172,9 @@ jreleaser {
                 tagName = '{{distributionName}} {{tagName}}'
                 branch = 'HEAD'
                 username = 'ahmedsaheed'
-//              token = JRELEASER_HOMEBREW_GITHUB_TOKEN
                 commitMessage = '{{distributionName}} {{tagName}}'
-//                formulaName = 'quranCLI'
             }
+            formulaName = 'quranCLI'
             multiPlatform = false
             livecheck = [
                     'url "https://host/sparkle/appcast-release.xml"',

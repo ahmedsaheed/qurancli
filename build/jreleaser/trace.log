@@ -55,10 +55,10 @@ Revision:     7f1d20795da6d9d3498914857a36ce361c3cc9c0
 [DEBUG]   [validation] s3
 [DEBUG]   [validation] packagers
 [DEBUG]   [validation] distributions
-[DEBUG]   [validation] distribution.app
-[DEBUG]   [validation] distribution.app.java
-[DEBUG]   [validation] distribution.app.brew
-[DEBUG]   [validation] distribution.app.brew.cask
+[DEBUG]   [validation] distribution.quranCLI
+[DEBUG]   [validation] distribution.quranCLI.java
+[DEBUG]   [validation] distribution.quranCLI.brew
+[DEBUG]   [validation] distribution.quranCLI.brew.cask
 [DEBUG]   [validation] files
 [DEBUG]   [validation] announce
 [DEBUG]   [validation] announce.webhooks
@@ -66,7 +66,7 @@ Revision:     7f1d20795da6d9d3498914857a36ce361c3cc9c0
 [DEBUG]   [validation] assemble
 [DEBUG]   [validation] jpackage
 [DEBUG]   [validation] distributions
-[DEBUG]   [validation] distribution.app
+[DEBUG]   [validation] distribution.quranCLI
 environment:
  
 project:
@@ -286,11 +286,11 @@ packagers:
         enabled: true
         active: always
         continueOnError: false
-        skipTemplates:
-            README.md.tpl
+        downloadUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}
         commitAuthor:
             name: Ahmed Saheed
             email: saheed@quranCLI.com
+        formulaName: quranCLI
         multiPlatform: false
         tap:
             enabled: true
@@ -459,7 +459,7 @@ upload:
     enabled: false
  
 distributions:
-    app:
+    quranCLI:
         enabled: true
         active: always
         type: JAVA_BINARY
@@ -474,18 +474,19 @@ distributions:
             enabled: true
             version: 17
             groupId: org.example
-            artifactId: app
+            artifactId: quranCLI
             mainClass: src/main/java/quranCLI.java
             multiProject: false
         brew:
             enabled: true
             active: always
             continueOnError: false
-            templateDirectory: src/jreleaser/distributions/app/brew
+            downloadUrl: https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}
+            templateDirectory: src/jreleaser/distributions/quranCLI/brew
             commitAuthor:
                 name: Ahmed Saheed
                 email: saheed@quranCLI.com
-            formulaName: app
+            formulaName: quranCLI
             multiPlatform: false
             tap:
                 enabled: true
@@ -590,7 +591,7 @@ distributions:
  
 [INFO]  Project version set to 1.0
 [INFO]  Release is not snapshot
-[INFO]  Timestamp is 2022-06-29T03:24:02.90792+01:00
-[INFO]  HEAD is at 1c1c6d9
+[INFO]  Timestamp is 2022-06-29T03:49:10.474741+01:00
+[INFO]  HEAD is at 6da2bf1
 [INFO]  Platform is osx-x86_64
 [INFO]  Writing output properties to build/jreleaser/output.properties
