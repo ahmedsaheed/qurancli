@@ -76,6 +76,7 @@ class quranCLI implements Callable<Integer> {
         return responses;
     }
 
+
     public static void GetSurah(int surahNumber) throws IOException {
         String url = "https://api.alquran.cloud/v1/surah/" + surahNumber;
         StringBuilder verses = new StringBuilder();
