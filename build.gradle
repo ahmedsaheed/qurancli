@@ -175,11 +175,7 @@ jreleaser {
                 commitMessage = '{{distributionName}} {{tagName}}'
             }
             formulaName = 'quranCLI'
-            multiPlatform = false
-            livecheck = [
-                    'url "https://host/sparkle/appcast-release.xml"',
-                    'strategy :sparkle']
-
+            multiPlatform = true
         }
     }
 }
