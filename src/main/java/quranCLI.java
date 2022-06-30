@@ -71,15 +71,7 @@ class quranCLI implements Callable<Integer> {
 
 
     public static void GetSurah(int surahNumber) throws IOException {
-        if (surahNumber > 114 || surahNumber < 1) {
-            System.out.println("Surah Number is not valid");
-            AsciiTable err = new AsciiTable();
-            err.addRule();
-            err.addRow("Surah Number is not valid, try in range 1 to 114").setTextAlignment(TextAlignment.CENTER);
-            err.addRule();
-            System.out.println(err.render());
-            System.exit(0);
-        }
+        SurahNumErr(surahNumber);
         String url = "https://api.alquran.cloud/v1/surah/" + surahNumber;
         StringBuilder verses = new StringBuilder();
         AsciiTable at = new AsciiTable();
@@ -135,6 +127,7 @@ class quranCLI implements Callable<Integer> {
     }
 
     public static String getEnglishTranslation(int surahNumber){
+        SurahNumErr(surahNumber);
         String url = "https://api.alquran.cloud/v1/surah/"+surahNumber+"/en.ahmedraza";
         AsciiTable at = new AsciiTable();
         try{
@@ -157,6 +150,18 @@ class quranCLI implements Callable<Integer> {
             return englishTranslation.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private static void SurahNumErr(int surahNumber) {
+        if (surahNumber > 114 || surahNumber < 1) {
+            System.out.println("Surah Number is not valid");
+            AsciiTable err = new AsciiTable();
+            err.addRule();
+            err.addRow("Surah Number is not valid, try in range 1 to 114").setTextAlignment(TextAlignment.CENTER);
+            err.addRule();
+            System.out.println(err.render());
+            System.exit(0);
         }
     }
 
