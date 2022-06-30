@@ -116,7 +116,7 @@ brew uninstall qurancli -f
 
 </details>
 
-###Windows 
+### Windows 
 
 ```bash
 scoop bucket add ahmedsaheed https://github.com/ahmedsaheed/scoop-ahmedsaheed.git
