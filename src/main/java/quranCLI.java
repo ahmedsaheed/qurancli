@@ -53,13 +53,6 @@ import java.util.concurrent.Callable;
                 A simple tool to Read, Search and Recite the Quran.
                 """)
 class quranCLI implements Callable<Integer> {
-    /*
-    TO REBUILD
-    javac -cp /Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/info.picocli/picocli/4.6.1/49a67ee4b4d9722fa60f3f9ffaffa72861c32966/picocli-4.6.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.antlr/ST4/4.0.8/a1c55e974f8a94d78e2348fa6ff63f4fa1fae64/ST4-4.0.8.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/de.vandermeer/ascii-utf-themes/0.0.1/4e6354685bb4bf62742dd8f0bc2de338e048e978/ascii-utf-themes-0.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.12.0/c6842c86792ff03b9f1d1fe2aab8dc23aa6c6f0e/commons-lang3-3.12.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/de.vandermeer/asciitable/0.3.2/96ee630413aa5a03ac5cbb34c79c95f91f417caa/asciitable-0.3.2.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/de.vandermeer/skb-interfaces/0.0.1/78940adb54f8dbcebb9b6166ebd0ff52ca124b32/skb-interfaces-0.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/javazoom/jlayer/1.0.1/2bfef7a5a4c9af2184ff74b460b6d7d24349b98a/jlayer-1.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.0.0/ab5a73fa2ccb4a36b0b5c69fe10b16d0255bcf8/okio-jvm-3.0.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.7.0/a5f42c684ad9003160ef0d0f693ecf0ba7b13549/kotlin-stdlib-1.7.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/4.10.0/cd63657ac15770ed1420647154c9f44645533bef/okhttp-4.10.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.json/json/20220320/6df2c050972619466f6dcef7654ef9bcc01dfd0/json-20220320.jar -d /Users/ahmedsaheed/Desktop/Desktop/quranCLI/classes /Users/ahmedsaheed/Desktop/Desktop/quranCLI/src/main/java/quranCLI.java
-
-    TO EXECUTE
-    java -cp .:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/info.picocli/picocli/4.6.1/49a67ee4b4d9722fa60f3f9ffaffa72861c32966/picocli-4.6.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.antlr/ST4/4.0.8/a1c55e974f8a94d78e2348fa6ff63f4fa1fae64/ST4-4.0.8.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/de.vandermeer/ascii-utf-themes/0.0.1/4e6354685bb4bf62742dd8f0bc2de338e048e978/ascii-utf-themes-0.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.12.0/c6842c86792ff03b9f1d1fe2aab8dc23aa6c6f0e/commons-lang3-3.12.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/de.vandermeer/asciitable/0.3.2/96ee630413aa5a03ac5cbb34c79c95f91f417caa/asciitable-0.3.2.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/de.vandermeer/skb-interfaces/0.0.1/78940adb54f8dbcebb9b6166ebd0ff52ca124b32/skb-interfaces-0.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/javazoom/jlayer/1.0.1/2bfef7a5a4c9af2184ff74b460b6d7d24349b98a/jlayer-1.0.1.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.0.0/ab5a73fa2ccb4a36b0b5c69fe10b16d0255bcf8/okio-jvm-3.0.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.7.0/a5f42c684ad9003160ef0d0f693ecf0ba7b13549/kotlin-stdlib-1.7.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/4.10.0/cd63657ac15770ed1420647154c9f44645533bef/okhttp-4.10.0.jar:/Users/ahmedsaheed/.gradle/caches/modules-2/files-2.1/org.json/json/20220320/6df2c050972619466f6dcef7654ef9bcc01dfd0/json-20220320.jar /Users/ahmedsaheed/Desktop/Desktop/quranCLI/src/main/java/quranCLI.java
-     */
 
     protected static String makeRequest(String url) throws IOException {
         String responses = "";
@@ -78,6 +71,15 @@ class quranCLI implements Callable<Integer> {
 
 
     public static void GetSurah(int surahNumber) throws IOException {
+        if (surahNumber > 114 || surahNumber < 1) {
+            System.out.println("Surah Number is not valid");
+            AsciiTable err = new AsciiTable();
+            err.addRule();
+            err.addRow("Surah Number is not valid, try in range 1 to 114").setTextAlignment(TextAlignment.CENTER);
+            err.addRule();
+            System.out.println(err.render());
+            System.exit(0);
+        }
         String url = "https://api.alquran.cloud/v1/surah/" + surahNumber;
         StringBuilder verses = new StringBuilder();
         AsciiTable at = new AsciiTable();
@@ -232,16 +234,6 @@ class quranCLI implements Callable<Integer> {
         }
     }
 
-    public static void KEYLISTENER(KeyEvent e){
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            System.out.println("Good Bye");
-            System.exit(0);
-        }
-    }
-
-
-
-
     @Option(names = {"-s", "--surah-number"}, description = "find a surah by it's number in range 1..114")
     private int surahNumber;
 
@@ -260,7 +252,7 @@ class quranCLI implements Callable<Integer> {
 
 
     @Override
-    public Integer call() throws Exception { // your business logic goes here...
+    public Integer call() throws Exception {
 
         if(a) {
             getAudio(surahNumber);
@@ -273,14 +265,7 @@ class quranCLI implements Callable<Integer> {
         else if(query != null) {
             search(query);
         }else {
-            if (surahNumber < 1 || surahNumber > 114) {
-                System.out.println("Opps ! The Quran has 114 Surahs.\nUse \"quranCLI [command] --help\" for more information about a command.");
-                return 0;
-            }
           GetSurah(surahNumber);
-
-
-
         }
 
         return 0;
