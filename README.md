@@ -116,6 +116,13 @@ brew uninstall qurancli -f
 
 </details>
 
+###Windows 
+
+```bash
+scoop bucket add ahmedsaheed https://github.com/ahmedsaheed/scoop-ahmedsaheed.git
+scoop install qurancli
+```
+
 ## Build
 ```bash
 git clone https://github.com/ahmedsaheed/quranCL
