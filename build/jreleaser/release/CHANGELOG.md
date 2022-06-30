@@ -1,5 +1,8 @@
 ## Changelog
 
+389df81 added gofish config
+ca7c59f Create README.md
+3e1ded2 fix main classpath
 c948f5b rebuild
 d3e7dc9 fix sha
 12b9d23 fix mainclass path

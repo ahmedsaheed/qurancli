@@ -13,7 +13,6 @@ downloadLicenses {
     dependencyConfiguration = 'implementation'
     includeProjectDependencies = true
 }
-
 // build.gradle app
 apply plugin: 'com.github.hierynomus.license'
 configurations.implementation.setCanBeResolved(true)
@@ -143,15 +142,24 @@ jreleaser {
 
     }
 
+//    distributions {
+//        app {
+//            active = 'ALWAYS'
+//            name = 'qurancli'
+//            executable {
+//                name = 'quranCLI'
+//            }
+//            artifact {
+//                path = 'build/distributions/{{name}}-{{projectVersion}}.zip'
+//            }
+//        }
+//    }
     distributions {
-        app {
+        qurancli {
             active = 'ALWAYS'
             name = 'qurancli'
-            executable {
-                name = 'quranCLI'
-            }
             artifact {
-                path = 'build/distributions/{{name}}-{{projectVersion}}.zip'
+                path = 'build/distributions/{{distributionName}}-{{projectVersion}}.zip'
             }
         }
     }
@@ -169,7 +177,7 @@ jreleaser {
                 active = 'ALWAYS'
                 owner = 'ahmedsaheed'
                 name = 'homebrew-tap'
-                tagName = '{{distributionName}} {{formulaName}}'
+                tagName = '{{distributionName}} {{tagName}}'
                 branch = 'HEAD'
                 username = 'ahmedsaheed'
                 commitMessage = '{{distributionName}} {{tagName}}'
@@ -177,7 +185,8 @@ jreleaser {
             formulaName = 'qurancli'
             multiPlatform = true
         }
-        gofish {
+
+        scoop {
             active = 'ALWAYS'
             continueOnError = false
             downloadUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}'
@@ -185,16 +194,17 @@ jreleaser {
                 name = 'Ahmed Saheed'
                 email = 'saheed@quranCLI.com'
             }
-            repository {
+            bucket{
                 active = 'ALWAYS'
                 owner = 'ahmedsaheed'
-                name = 'qurancli-fish-food'
+                name = 'scoop-ahmedsaheed'
                 tagName = '{{distributionName}} {{tagName}}'
                 branch = 'HEAD'
                 username = 'ahmedsaheed'
                 commitMessage = '{{distributionName}} {{tagName}}'
             }
         }
+
     }
 }
 gradle.startParameter.excludedTaskNames += "licenseMain"
