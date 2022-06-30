@@ -37,10 +37,10 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'de.vandermeer:asciitable:0.3.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    implementation 'info.picocli:picocli:4.6.1'
-    annotationProcessor 'info.picocli:picocli-codegen:4.6.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    implementation 'info.picocli:picocli:4.6.3'
+    annotationProcessor 'info.picocli:picocli-codegen:4.6.3'
     implementation group: 'javazoom', name: 'jlayer', version: '1.0.1'
 
 
@@ -142,18 +142,6 @@ jreleaser {
 
     }
 
-//    distributions {
-//        app {
-//            active = 'ALWAYS'
-//            name = 'qurancli'
-//            executable {
-//                name = 'quranCLI'
-//            }
-//            artifact {
-//                path = 'build/distributions/{{name}}-{{projectVersion}}.zip'
-//            }
-//        }
-//    }
     distributions {
         qurancli {
             active = 'ALWAYS'
@@ -177,7 +165,7 @@ jreleaser {
                 active = 'ALWAYS'
                 owner = 'ahmedsaheed'
                 name = 'homebrew-tap'
-                tagName = '{{distributionName}} {{tagName}}'
+                tagName = '{{distributionName}} {{formulaName}}'
                 branch = 'HEAD'
                 username = 'ahmedsaheed'
                 commitMessage = '{{distributionName}} {{tagName}}'
@@ -186,24 +174,24 @@ jreleaser {
             multiPlatform = true
         }
 
-        scoop {
-            active = 'ALWAYS'
-            continueOnError = false
-            downloadUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}'
-            commitAuthor {
-                name = 'Ahmed Saheed'
-                email = 'saheed@quranCLI.com'
-            }
-            bucket{
-                active = 'ALWAYS'
-                owner = 'ahmedsaheed'
-                name = 'scoop-ahmedsaheed'
-                tagName = '{{distributionName}} {{tagName}}'
-                branch = 'HEAD'
-                username = 'ahmedsaheed'
-                commitMessage = '{{distributionName}} {{tagName}}'
-            }
-        }
+//        scoop {
+//            active = 'ALWAYS'
+//            continueOnError = false
+//            downloadUrl = 'https://{{repoHost}}/{{repoOwner}}/{{repoName}}/releases/download/{{tagName}}/{{artifactFile}}'
+//            commitAuthor {
+//                name = 'Ahmed Saheed'
+//                email = 'saheed@quranCLI.com'
+//            }
+//            bucket{
+//                active = 'ALWAYS'
+//                owner = 'ahmedsaheed'
+//                name = 'scoop-ahmedsaheed'
+//                tagName = '{{distributionName}} {{bucketName}}'
+//                branch = 'HEAD'
+//                username = 'ahmedsaheed'
+//                commitMessage = '{{distributionName}} {{tagName}}'
+//            }
+//        }
 
     }
 }

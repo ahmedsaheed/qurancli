@@ -1,10 +1,10 @@
-# Generated with JReleaser 1.0.0 at 2022-06-30T13:50:12.735173+01:00
+# Generated with JReleaser 1.0.0 at 2022-06-30T17:26:21.913003+01:00
 class Qurancli < Formula
   desc "A simple tool to Read, Search and Recite the Quran."
   homepage "https://github.com/ahmedsaheed/quranCLI"
   url "https://github.com/ahmedsaheed/quranCLI/releases/download/v1.0.0/qurancli-1.0.zip"
   version "1.0"
-  sha256 "a7169607841522940f4b30d5d3094162b52402d211026e2d2fba943e4d877ea7"
+  sha256 "b8441214642053462d2df4776739329e804a9c91c7f41d6c1858463df4c8a3ab"
   license "Apache-2.0"
 
   depends_on "openjdk@17"

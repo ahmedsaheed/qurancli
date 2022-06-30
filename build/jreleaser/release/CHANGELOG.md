@@ -1,5 +1,6 @@
 ## Changelog
 
+3a10f3e resolve scoop
 389df81 added gofish config
 ca7c59f Create README.md
 3e1ded2 fix main classpath
