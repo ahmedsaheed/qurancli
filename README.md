@@ -86,6 +86,8 @@ Copyright(c) quranCLI 2022
 
 ```
 ## Install
+
+### ⚠️[This application requires a terminal which support bi-directional text](https://gist.github.com/XVilka/a0e49e1c65370ba11c17)⚠️
 ### MacOS and Linux
 
 Install using [Homebrew](https://brew.sh/)
@@ -117,8 +119,6 @@ brew uninstall qurancli -f
 </details>
 
 ### Windows 
-
-⚠️WARNING: On windows, you'd need a terminal which support bi-directional text⚠️
 
 Install Java & Specify the JAVA_HOME path
 
