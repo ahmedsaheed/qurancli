@@ -119,8 +119,9 @@ brew uninstall qurancli -f
 </details>
 
 ### Windows 
+Install Using [Scoop](https://scoop.sh/#/)
 
-Install Java & Specify the JAVA_HOME path
+Step 1: Install Java & Specify the JAVA_HOME path
 
 ```bash
 scoop bucket add java
@@ -132,6 +133,7 @@ scoop bucket add extras
 scoop install find-java
 
 ```
+Step 2: Install the application
 
 ```bash
 scoop bucket add ahmedsaheed https://github.com/ahmedsaheed/scoop-ahmedsaheed.git
