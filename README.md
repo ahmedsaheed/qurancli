@@ -118,6 +118,8 @@ brew uninstall qurancli -f
 
 ### Windows 
 
+⚠️WARNING: On windows, you'd need a terminal which support bi-directional text⚠️
+
 Install Java & Specify the JAVA_HOME path
 
 ```bash
