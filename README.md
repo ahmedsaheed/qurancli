@@ -1,94 +1,38 @@
 <h1 align="center">Quran CLI</h1>
-<p align="center">
-    <img width="200" src="https://user-images.githubusercontent.com/87912847/176374730-a7782c3b-2e3c-485f-baa8-a8f93887affb.png" alt="logo">
-</p>
-<h3 align="center">Read, Search and Recite the Quran.</h3>
+<h3 align="center">Read, Search and Recite the Quran from your terminal.</h3>
 <p align="center">
  <a  href="https://www.apache.org/licenses/LICENSE-2.0">
     <img src="https://img.shields.io/hexpm/l/apa">
   </a>
-  
    <img src="https://img.shields.io/homebrew/v/quran">
-  
-  
   </p>
-
-
-
-https://user-images.githubusercontent.com/87912847/176378236-c3bcd52c-c6c4-4cf2-aaf4-9a1a2ed9c7b9.mov
-
-> Unmute the video to listen
-
-# Table of Contents
-- [About](#about)
-- [Examples](#examples)
-- [Commands](#commands)
-- [Install](#install)
-- [Build](#build)
-
-
-## About
-
-📖 __quranCLI__ is simple tool to Read, Search and Recite the Quran from cli.
-
-written in java using [picocli](https://github.com/remkop/picocli)
-
-⚙️ Fast and with almost zero space consumption.
-
-🦎 Works on all OS no config required- Mac, Linux & Windows
-
-🍿 This app is inspired by __mangal__ [mangal](https://github.com/metafates/mangal). Check it out!
-
+  
+https://github.com/ahmedsaheed/qurancli/assets/87912847/df42a8ad-d0c0-44bc-83c6-cfb9f355a66f
 
 ## Examples
 ```bash
-# Read surah Al-Fatiha in arabic
-qurancli -s 1
-
-# Read surah Al-Fatiha in english
-qurancli -s 1 -t
-
-# Play Al-Fatiha Audio
-qurancli -s 1 -a
-
-# Play Al-Fatiha Audio in english
-qurancli -s 1 -at
-
-# Search any word in the quran
-qurancli -q "Mohammed"
+qurancli -s 1 # Read surah Al-Fatiha in arabic
+qurancli -s 1 -t # Read surah Al-Fatiha in english
+qurancli -s 1 -a # Play Al-Fatiha Audio
+qurancli -s 1 -at # Play Al-Fatiha Audio in english
+qurancli -q "Mohammed" # Search any word in the quran
 ```
 
 
 ## Commands
 
-```
-Usage: quranCLI  [-ahtV] [-at] [-q=<query>] [-s=<surahNumber>]
-      ______ ______
-    _/      Q      \_
-   // ~~ ~~ | ~~ ~  \\
-  // ~ ~ ~~ | ~~~ ~~ \\
- //________.|.________\\
-`----------`-'----------'
-       AL-QURAN CLI
-A simple tool to Read, Search and Recite the Quran.
+|Command|Usage|
+|-|-|
+|-s, --surah-number=surahNumber|find a surah by it's number in range 1 -> 114|
+|-a, --audio| Plays audio version of surah|
+|-at, --AudioTranslation| Translate surah to english and play audio|
+|-q, --query=queryString| Search a keyword from the quran|
+|-t, --translation|Translate a selected surah to english|
+|-V, --version|Print version information and exit.|
 
-  -a, --audio           plays audio version of surah
-      -at, --AudioTranslation
-                        Translate surah to english and play audio
-  -h, --help            Show this help message and exit.
-  -q, --query=<query>   Search a keyword in the quran
-  -s, --surah-number=<surahNumber>
-                        find a surah by it's number in range 1..114
-  -t, --translation     Translate surah to english
-  -V, --version         Print version information and exit.
-
-Copyright(c) quranCLI 2022
-
-```
 ## Install
 
-### ⚠️[This application requires a terminal which support bi-directional text](https://gist.github.com/XVilka/a0e49e1c65370ba11c17)⚠️
-
+###
 
 ### MacOS and Linux
 
@@ -159,12 +103,6 @@ qurancli -s -1
 
 ```
 
-## :question: Get Help
+<sub>Copyright(c) quranCLI 2022</sub>
 
-There are few ways to get help:
-
- 1. You can open issues with questions in this repository.
- 2. For bug reports and feature requests, open issues. :bug:
-
-## :yum: How to contribute
-Have an idea? Found a bug? Open an Issue.
+<sub>This application requires a terminal which support bi-directional text<sub> 
